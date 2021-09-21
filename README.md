@@ -1,2 +1,2 @@
-# FS20210921
-Curso de ViewNext
+# Curso de ViewNext
+Curso de Full Stack
