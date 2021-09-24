@@ -1,0 +1,72 @@
+$color: red;
+$propiedad: color;
+$ancho: min-width;
+$ancho-definido: 100px;
+$modulo: articulo;
+
+:root {
+    --error-color: rgb(163, 0, 0);
+    --principal-background-color: white;
+    --principal-text-color: rgb(39, 39, 163);
+    --principal-caption-color: rgb(0, 0, 116);
+    --secundario-background-color: black;
+    --secundario-text-color: white;
+    --secundario-caption-color: white;
+}
+.my-#{$propiedad} {
+    #{$ancho}: $ancho-definido;
+    background-color: aqua;
+}
+.#{$modulo}__menu {
+    background-color: aqua;
+
+}
+.#{$modulo}__logo {
+    background-color: aqua;
+   
+}
+.#{$modulo}__login {
+    background-color: aqua;
+  
+}
+body {
+    #{$propiedad}: $color;
+    div {
+        background-color: aqua;
+    }
+    background-color: var(--principal-background-color, white);
+//    color: var(--principal-text-color, black);
+    margin: 0;
+    > header,  > footer  {
+        display: flex;
+        flex-flow: row wrap;
+        background-color: var(--secundario-background-color, black);;
+        color: var(--secundario-text-color, black);
+        padding: 10px;
+        align-items: stretch;
+    }
+}
+
+.cabecera-principal, .pie-principal {
+    display: flex;
+    flex-flow: row wrap;
+    background-color: var(--secundario-background-color, black);;
+    color: var(--secundario-text-color, black);
+    padding: 10px;
+    align-items: stretch;
+}
+.cabecera-principal, .pie-principal, body > header a, body > footer a {
+    color: var(--secundario-text-color, black);
+}
+.cabecera-principal, body > header {
+    position: sticky;
+    top: 0;
+}
+
+.cabecera-principal__logo, #logo {
+    max-width: 120px;
+}
+
+.cabecera-principal__menu {
+    align-self: stretch;
+}
