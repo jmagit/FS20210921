@@ -1,3 +1,5 @@
+@use 'principales';
+
 $color: red;
 $propiedad: color;
 $ancho: min-width;
@@ -47,13 +49,17 @@ body {
     }
 }
 
-.cabecera-principal, .pie-principal {
-    display: flex;
-    flex-flow: row wrap;
-    background-color: var(--secundario-background-color, black);;
-    color: var(--secundario-text-color, black);
-    padding: 10px;
-    align-items: stretch;
+
+.cabecera-principal {
+    @include elementosPrincipales();
+    &__menu {
+        flex-grow: 1;
+        margin-left: 5px;
+        margin-right: 5px;
+    }   
+}
+.pie-principal {
+    @include elementosPrincipales(12px) ;  
 }
 .cabecera-principal, .pie-principal, body > header a, body > footer a {
     color: var(--secundario-text-color, black);
