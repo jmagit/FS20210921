@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clientes</title>
     <link rel="stylesheet" href="theme/style.css">
 </head>
+
 <body>
     <header class="cabecera-principal">
         <img id="logo" src="./images/logo.png" alt="Logotipo de ViewNext">
@@ -27,57 +29,92 @@
         <form class="form form--col2">
             <div class="field col-2">
                 <label for="customer_id">Código</label>
-                <input type="number" id="customer_id" name="customer_id" placeholder="Código del usuario" required >
+                <input type="number" id="customer_id" name="customer_id" placeholder="Código del usuario" required>
             </div>
             <div class="field">
                 <label for="store_id">Tienda</label>
-                <select id="store_id" name="store_id" >
+                <select id="store_id" name="store_id">
                     <option value="1">Tienda 1</option>
                     <option value="2">Tienda 2</option>
                 </select>
             </div>
             <div class="field colspan-2">
                 <label for="first_name">Nombre</label>
-                <input type="text" id="first_name" name="first_name" required minlength="2" maxlength="50" >
+                <input type="text" id="first_name" name="first_name" required minlength="2" maxlength="50">
             </div>
             <div class="field colspan-2">
                 <label for="last_name">Apellidos</label>
-                <input type="text" id="last_name" name="last_name" minlength="2" maxlength="50" >
+                <input type="text" id="last_name" name="last_name" minlength="2" maxlength="50">
             </div>
             <div class="field">
                 <label for="email">Correo</label>
-                <input type="email" id="email" name="email" placeholder="Correo electrónico" required >
+                <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
             </div>
-            <div class="field row-4x2">
+            <div class="field row-5x2">
                 <label for="address_id">Dirección</label>
                 <div class="field__radio">
-                    <input type="radio" id="address_id" name="address_id" checked value="1" >
-                    Casa    
-                </div>
-                <div class="field__radio">
-                    <input type="radio" id="address_id" name="address_id" value="2" >
-                    Trabajo    
+                    <span>
+                        <input type="radio" id="address_id" name="address_id" checked value="1">
+                        Casa
+                    </span>
+                    <span>
+                        <input type="radio" name="address_id" value="2">
+                        Trabajo
+                    </span>
                 </div>
             </div>
             <div class="field">
                 <label for="active">Activo</label>
-                <input type="checkbox" id="active" name="active" value="true" checked >
+                <input type="checkbox" id="active" name="active" value="true" checked>
             </div>
             <div class="field">
                 <label for="create_date">F. Creación</label>
-                <input type="date" id="create_date" name="create_date" >
+                <input type="date" id="create_date" name="create_date">
             </div>
             <div class="field">
                 <label for="last_update">Última modificacion</label>
-                <input type="date" id="last_update" name="last_update" >
+                <input type="date" id="last_update" name="last_update">
             </div>
             <div class="form__comand">
-                <input type="submit" value="enviar" >
-                <input type="button" value="volver" >
+                <input type="submit" value="enviar">
+                <input type="button" value="volver">
+            </div>
+        </form>
+        <form class="form form--col4">
+            <label for="customer_id">Código</label>
+            <input type="number" id="customer_id" name="customer_id" placeholder="Código del usuario" required>
+            <label for="store_id">Tienda</label>
+            <select id="store_id" name="store_id">
+                <option value="1">Tienda 1</option>
+                <option value="2">Tienda 2</option>
+            </select>
+            <label for="first_name">Nombre</label>
+            <input class="colspan-3" type="text" id="first_name" name="first_name" required minlength="2"
+                maxlength="50">
+            <label for="last_name">Apellidos</label>
+            <input class="colspan-3" type="text" id="last_name" name="last_name" minlength="2" maxlength="50">
+            <label for="email">Correo</label>
+            <input class="colspan-3" type="email" id="email" name="email" placeholder="Correo electrónico" required>
+            <label for="address_id">Dirección</label>
+            <div class="field__radio">
+                <input type="radio" id="address_id" name="address_id" checked value="1">
+                Casa
+                <input type="radio" name="address_id" value="2">
+                Trabajo
+            </div>
+            <label for="active">Activo</label>
+            <input type="checkbox" id="active" name="active" value="true" checked>
+            <label for="create_date">F. Creación</label>
+            <input type="date" id="create_date" name="create_date">
+            <label for="last_update">Última modificacion</label>
+            <input type="date" id="last_update" name="last_update">
+            <div class="form__comand">
+                <input type="submit" value="enviar">
+                <input type="button" value="volver">
             </div>
         </form>
     </main>
-    <footer>
+    <footer class="pie-principal">
         <div>
             &copy; 2021 Todos los derechos reservados | <a href="/aviso-legal" target="_blank">Aviso Legal</a> | <a
                 href="/politica-de-privacidad" target="_blank">Política de Privacidad</a> | <a
@@ -85,4 +122,5 @@
         </div>
     </footer>
 </body>
+
 </html>
