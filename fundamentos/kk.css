@@ -1,17 +1,166 @@
-/* Error: Undefined mixin.
- *    ,
- * 54 |     @include elementosPrincipales();
- *    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- *    '
- *   kk.scss 54:5  root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: "Error: Undefined mixin.\a    \2577 \a 54 \2502      @include elementosPrincipales();\d\a    \2502      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a    \2575 \a   kk.scss 54:5  root stylesheet";
+.otra, body > header, body > footer {
+  display: flex;
+  flex-flow: row wrap;
 }
+
+:root {
+  --error-color: rgb(163, 0, 0);
+  --principal-background-color: white;
+  --principal-text-color: rgb(39, 39, 163);
+  --principal-caption-color: rgb(0, 0, 116);
+  --secundario-background-color: black;
+  --secundario-text-color: white;
+  --secundario-caption-color: white;
+}
+
+.my-color {
+  min-width: 100px;
+  background-color: aqua;
+}
+
+.articulo__menu {
+  background-color: aqua;
+}
+
+.articulo__logo {
+  background-color: aqua;
+}
+
+.articulo__login {
+  background-color: aqua;
+}
+
+body {
+  color: red;
+  background-color: var(--principal-background-color, white);
+  margin: 0;
+}
+body div {
+  background-color: aqua;
+}
+body > header, body > footer {
+  background-color: var(--secundario-background-color, black);
+  color: var(--secundario-text-color, black);
+  padding: 10px;
+  align-items: stretch;
+}
+
+.cabecera-principal {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: var(--secundario-background-color, black);
+  color: var(--secundario-text-color, black);
+  padding: 10px;
+  align-items: stretch;
+}
+.cabecera-principal__algo {
+  margin-left: 5px;
+}
+.cabecera-principal__menu {
+  flex-grow: 1;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.pie-principal {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: var(--secundario-background-color, black);
+  color: var(--secundario-text-color, black);
+  padding: 12px;
+  align-items: stretch;
+}
+.pie-principal__algo {
+  margin-left: 5px;
+}
+
+.cabecera-principal, .pie-principal, body > header a, body > footer a {
+  color: var(--secundario-text-color, black);
+}
+
+.cabecera-principal, body > header {
+  position: sticky;
+  top: 0;
+}
+
+.cabecera-principal__logo, #logo {
+  max-width: 120px;
+}
+
+.cabecera-principal__menu {
+  align-self: stretch;
+}
+
+.otra {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.icon-40px {
+  font-size: 40px;
+  height: 40px;
+  width: 40px;
+}
+
+.icon-50px {
+  font-size: 50px;
+  height: 50px;
+  width: 50px;
+}
+
+.icon-80px {
+  font-size: 80px;
+  height: 80px;
+  width: 80px;
+}
+
+/* indicadore de columnas grid */
+.col-1 {
+  grid-column: 1;
+}
+
+.col-2 {
+  grid-column: 2;
+}
+
+.col-3 {
+  grid-column: 3;
+}
+
+.col-4 {
+  grid-column: 4;
+}
+
+.col-5 {
+  grid-column: 5;
+}
+
+.col-6 {
+  grid-column: 6;
+}
+
+.col-7 {
+  grid-column: 7;
+}
+
+.col-8 {
+  grid-column: 8;
+}
+
+.col-9 {
+  grid-column: 9;
+}
+
+.col-10 {
+  grid-column: 10;
+}
+
+.col-11 {
+  grid-column: 11;
+}
+
+.col-12 {
+  grid-column: 12;
+}
+
+/*# sourceMappingURL=kk.css.map */
