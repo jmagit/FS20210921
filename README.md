@@ -4,7 +4,7 @@ Curso de Full Stack
 ## HTML
 
 - Presentación (personal)
-- [Página principal Sakila](https://dev.mysql.com/doc/sakila/en/)
+- [Página principal Video Club Sakila](https://dev.mysql.com/doc/sakila/en/)
 - [Formulario de customer](https://dev.mysql.com/doc/sakila/en/sakila-structure-tables-customer.html)
 
 ## CSS
@@ -25,3 +25,8 @@ Curso de Full Stack
 - [Fotos](https://picsum.photos/)
 - [Iconos](https://fontawesome.com/)
 - [Textos](https://www.lipsum.com/)
+
+## SASS
+
+- Convertir la hoja de estilos a SASS
+
