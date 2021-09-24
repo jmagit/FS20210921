@@ -1,0 +1,233 @@
+@import url('variables.css');
+@import url('../node_modules/@fortawesome/fontawesome-free/css/all.css');
+@font-face{
+    font-family: "Principal";
+    src: url('Honey\ Baby.ttf') format('truetype'), 
+        url('Honey\ Baby.woff') format('woff'), 
+        url('Honey\ Baby.woff2') format('woff'), 
+        url('Honey\ Baby.otf') format('opentype');
+}
+@font-face{
+    font-family: "Titulo";
+    src: url('cinema_st.ttf') format('truetype');
+}
+body {
+    background-color: var(--principal-background-color, white);
+    color: var(--principal-text-color, black);
+    margin: 0;
+    font-family: 'Principal';
+}
+main {
+    margin: 5px 10px;
+}
+
+.cabecera-principal, .pie-principal, body > header, body > footer {
+    display: flex;
+    flex-flow: row wrap;
+    background-color: var(--secundario-background-color, black);
+    color: var(--secundario-text-color, black);
+    padding: 10px;
+    align-items: stretch;
+}
+.cabecera-principal a, .pie-principal a, body > header a, body > footer a {
+    color: var(--secundario-text-color, black);
+    text-decoration: none;
+    padding: 2px 5px;
+}
+.cabecera-principal a:hover, .pie-principal a:hover, body > header a:hover, body > footer a:hover {
+    color: var(--secundario-background-color, black);
+    background-color: var(--secundario-text-color, black);
+    text-decoration: none;
+    border-radius: 25px;
+}
+.cabecera-principal, body > header {
+    position: sticky;
+    top: 0;
+}
+
+.cabecera-principal__logo, #logo {
+    flex-grow: 1;
+    max-width: 120px;
+}
+
+.cabecera-principal__menu {
+    flex-grow: 1;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.cabecera-principal__login {
+    text-align: right;
+    flex-grow: 1;
+}
+.cabecera-principal__login--hidden {
+    display: none;
+}
+.cabecera-principal__logout {
+    align-self: flex-start;
+}
+.cabecera-principal--hidden {
+    display: none;
+}
+
+.cabecera-principal__logout--hidden {
+    display: none;
+}
+
+.error-msg {
+    color: var(--error-color, red);
+}
+
+.novedades, section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+    text-align: center;
+}
+
+.novedades__cabecera, section header {
+    font-family: Titulo;
+    font-size: 4em;
+    width: 100%;
+}
+.novedades__articulo, article {
+    margin: 10px;
+    text-align: center;
+    /* border: 1px solid var(--principal-text-color, black); */
+}
+
+.novedades__articulo-figure {
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+}
+
+.novedades__articulo-summary, article summary {
+    text-align: justify;
+    width: 100%;
+}
+.novedades__articulo-figcaption, figcaption {
+    font-size: small;
+}
+
+.img--redonda {
+    border-radius: 50%;
+}
+@media (min-width: 576px) {
+    .novedades__cabecera {
+        font-size: 1.5em;
+    }
+    .novedades__articulo-summary {
+        width: 300px;
+    }  
+}
+@media (min-width: 768px) {
+    .novedades__articulo-summary {
+        width: 400px;
+        font-size: 1.5em;
+    }  
+}
+@media (min-width: 1200px) {
+    .novedades__articulo-summary {
+        width: 450px;
+        font-size: 2em;
+    }  
+}
+@media (max-width:320px) {
+    .novedades__cabecera, section header {
+        font-size: 1.5em;
+    }
+    .novedades__articulo-figure, figure {
+        display: none;
+    }  
+}
+
+@media print {
+    input[type=submit], input[type=button], input[type=reset] {
+        display: none;
+    }
+    body > header {
+        display: none;
+    }
+    body {
+        font-size: 10pt;
+    }
+    img {
+        max-width: 200px;
+    }
+}
+
+.col-1 {
+    grid-column: 1;
+}
+.col-2 {
+    grid-column: 2;
+}
+.col-3 {
+    grid-column: 3;
+}
+.col-4 {
+    grid-column: 4;
+}
+.colspan-2 {
+    grid-column: span 2;
+}
+.colspan-3 {
+    grid-column: span 3;
+}
+.colspan-4 {
+    grid-column: span 4;
+}
+
+.row-1 {
+    grid-row: 1;
+}
+.row-2 {
+    grid-row: 2;
+}
+.row-3 {
+    grid-row: 3;
+}
+.row-4 {
+    grid-row: 4;
+}
+.row-4x2 {
+    grid-row: 4 /span 2;
+}
+.rowspan-2 {
+    grid-row: span 2;
+}
+.rowspan-3 {
+    grid-row: span 3;
+}
+.rowspan-4 {
+    grid-row: span 4;
+}
+
+.form {
+    display: grid;
+}
+.form--col2 {
+    grid-template-columns: 1fr 1fr;
+}
+.form--col3 {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.form__comand {
+    text-align: right;
+    grid-column: span 2;
+}
+.field {
+    display: flex;
+    flex-flow: row wrap;
+}
+.field label {
+    margin-right: 10px;
+}
+.field input, .field select, .field__radio {
+    width: 80%;
+}
+input[type=checkbox], input[type=radio] {
+    max-width: 10%;
+}

@@ -1,0 +1,14 @@
+@mixin elementosPrincipales($padding: 10px) {
+    @if $padding == 0 {
+        @error 'necesito padding';
+    }
+    display: flex;
+    flex-flow: row wrap;
+    background-color: var(--secundario-background-color, black);;
+    color: var(--secundario-text-color, black);
+    padding: $padding;
+    align-items: stretch;
+    &__algo {
+        margin-left: 5px;
+    }
+}

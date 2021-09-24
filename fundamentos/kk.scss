@@ -1,9 +1,14 @@
+@use 'principales' as *;
+
 $color: red;
 $propiedad: color;
 $ancho: min-width;
 $ancho-definido: 100px;
 $modulo: articulo;
-
+%comun {
+    display: flex;
+    flex-flow: row wrap;
+}
 :root {
     --error-color: rgb(163, 0, 0);
     --principal-background-color: white;
@@ -38,8 +43,7 @@ body {
 //    color: var(--principal-text-color, black);
     margin: 0;
     > header,  > footer  {
-        display: flex;
-        flex-flow: row wrap;
+        @extend %comun;
         background-color: var(--secundario-background-color, black);;
         color: var(--secundario-text-color, black);
         padding: 10px;
@@ -47,13 +51,17 @@ body {
     }
 }
 
-.cabecera-principal, .pie-principal {
-    display: flex;
-    flex-flow: row wrap;
-    background-color: var(--secundario-background-color, black);;
-    color: var(--secundario-text-color, black);
-    padding: 10px;
-    align-items: stretch;
+
+.cabecera-principal {
+    @include elementosPrincipales();
+    &__menu {
+        flex-grow: 1;
+        margin-left: 5px;
+        margin-right: 5px;
+    }   
+}
+.pie-principal {
+    @include elementosPrincipales(12px) ;  
 }
 .cabecera-principal, .pie-principal, body > header a, body > footer a {
     color: var(--secundario-text-color, black);
@@ -70,3 +78,23 @@ body {
 .cabecera-principal__menu {
     align-self: stretch;
 }
+
+.otra {
+    @extend %comun;
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+
+$sizes: 40px, 50px, 80px;
+@each $size in $sizes {
+  .icon-#{$size} { font-size: $size; height: $size; width: $size; }
+}
+
+/* indicadore de columnas grid */
+// este no se ve
+@for $i from 1 through 12 {
+    @debug 'genero ' + $i;
+    .col-#{$i} { grid-column: $i; }
+  }
+  

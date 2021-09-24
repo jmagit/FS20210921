@@ -1,0 +1,233 @@
+@use "variables" as *;
+@import url('../node_modules/@fortawesome/fontawesome-free/css/all.css');
+@font-face{
+    font-family: "Principal";
+    src: url('Honey\ Baby.ttf') format('truetype'), 
+        url('Honey\ Baby.woff') format('woff'), 
+        url('Honey\ Baby.woff2') format('woff'), 
+        url('Honey\ Baby.otf') format('opentype');
+}
+@font-face{
+    font-family: "Titulo";
+    src: url('cinema_st.ttf') format('truetype');
+}
+body {
+    background-color: $principal-background-color;
+    color: $principal-text-color;
+    margin: 0;
+    font-family: 'Principal';
+}
+main {
+    margin: 5px 10px;
+}
+
+@mixin barras-principales {
+    display: flex;
+    flex-flow: row wrap;
+    background-color: $secundario-background-color;
+    color: $secundario-text-color;
+    padding: 10px;
+    align-items: stretch;
+    a {
+        color: $secundario-text-color;
+        text-decoration: none;
+        padding: 2px 5px;
+    }
+    a:hover {
+        color: $secundario-background-color;
+        background-color: $secundario-text-color;
+        text-decoration: none;
+        border-radius: 25px;
+    }
+}
+.cabecera-principal {
+    @include barras-principales();
+    position: sticky;
+    top: 0;
+    &__logo {
+        flex-grow: 1;
+        max-width: 120px;
+    }
+    
+    &__menu {
+        flex-grow: 1;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    
+    &__login {
+        text-align: right;
+        flex-grow: 1;
+        &--hidden {
+            display: none;
+        }    
+    }
+
+    &__logout {
+        align-self: flex-start;
+        &--hidden {
+            display: none;
+        }
+    }
+    &--hidden {
+        display: none;
+    }
+}
+.pie-principal {
+    @include barras-principales();
+}
+
+.error-msg {
+    color: $error-color;
+}
+
+.novedades {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+    text-align: center;
+    &__cabecera {
+        font-family: Titulo;
+        font-size: 4em;
+        width: 100%;
+    }
+    &__articulo {
+        margin: 10px;
+        text-align: center;
+        // border: 1px solid $principal-text-color;
+        &-figure {
+            margin-inline-start: 0;
+            margin-inline-end: 0;
+        }
+        &-summary {
+            text-align: justify;
+            width: 100%;
+        }
+        &-figcaption {
+            font-size: small;
+        }
+    }
+}
+
+.img--redonda {
+    border-radius: 50%;
+}
+@media (min-width: 576px) {
+    .novedades__cabecera {
+        font-size: 1.5em;
+    }
+    .novedades__articulo-summary {
+        width: 300px;
+    }  
+}
+@media (min-width: 768px) {
+    .novedades__articulo-summary {
+        width: 400px;
+        font-size: 1.5em;
+    }  
+}
+@media (min-width: 1200px) {
+    .novedades__articulo-summary {
+        width: 450px;
+        font-size: 2em;
+    }  
+}
+@media (max-width:320px) {
+    .novedades__cabecera, section header {
+        font-size: 1.5em;
+    }
+    .novedades__articulo-figure, figure {
+        display: none;
+    }  
+}
+
+@media print {
+    input[type=submit], input[type=button], input[type=reset] {
+        display: none;
+    }
+    body > header {
+        display: none;
+    }
+    body {
+        font-size: 10pt;
+    }
+    img {
+        max-width: 200px;
+    }
+}
+
+.col-1 {
+    grid-column: 1;
+}
+.col-2 {
+    grid-column: 2;
+}
+.col-3 {
+    grid-column: 3;
+}
+.col-4 {
+    grid-column: 4;
+}
+.colspan-2 {
+    grid-column: span 2;
+}
+.colspan-3 {
+    grid-column: span 3;
+}
+.colspan-4 {
+    grid-column: span 4;
+}
+
+.row-1 {
+    grid-row: 1;
+}
+.row-2 {
+    grid-row: 2;
+}
+.row-3 {
+    grid-row: 3;
+}
+.row-4 {
+    grid-row: 4;
+}
+.row-4x2 {
+    grid-row: 4 /span 2;
+}
+.rowspan-2 {
+    grid-row: span 2;
+}
+.rowspan-3 {
+    grid-row: span 3;
+}
+.rowspan-4 {
+    grid-row: span 4;
+}
+
+.form {
+    display: grid;
+}
+.form--col2 {
+    grid-template-columns: 1fr 1fr;
+}
+.form--col3 {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.form__comand {
+    text-align: right;
+    grid-column: span 2;
+}
+.field {
+    display: flex;
+    flex-flow: row wrap;
+}
+.field label {
+    margin-right: 10px;
+}
+.field input, .field select, .field__radio {
+    width: 80%;
+}
+input[type=checkbox], input[type=radio] {
+    max-width: 10%;
+}
