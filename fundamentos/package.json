@@ -4,7 +4,7 @@
   "description": "Ejemplos y ejercicios",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "karma start",
     "lint": "eslint app/js/**/*.js"
   },
   "author": "Javier",
