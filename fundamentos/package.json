@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "eslint": "^7.32.0",
-    "eslint-plugin-jasmine": "^4.1.2"
+    "eslint-plugin-jasmine": "^4.1.2",
+    "jasmine-browser-runner": "^0.8.0"
   }
 }
