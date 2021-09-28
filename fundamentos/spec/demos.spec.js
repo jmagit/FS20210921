@@ -1,6 +1,6 @@
 // 'use strict' 
-
-describe('Demos de las pruebas', function() {
+/*
+xdescribe('Demos de las pruebas', function() {
     describe('Calculos', function() {
         it('suma 2 + 2', function() {
             let a = 2, b = 2;
@@ -59,8 +59,8 @@ describe('Demos de las pruebas', function() {
 var soyGlobal = 'algo'
 const count = 0;
 
-fdescribe('Sintaxis', function() {
-    describe('Ejemplos 1', function() {
+xdescribe('Sintaxis', function() {
+    xdescribe('Ejemplos 1', function() {
         xit('Operadores', function() {
             function kk() {
                 var i = 1;
@@ -102,5 +102,41 @@ fdescribe('Sintaxis', function() {
 
         })
     })
-    
+    it('lamda', () => {
+
+    })
+    xdescribe('colecciones', function() {
+        it('Multiples', function() {
+            let t = [10, 20, 30];
+            let o = { x: 10, y: 20}
+            function delta(x, y) {
+                return x -y;
+            }
+            delta(o.x, o.y);
+            delta(...o);
+            let a, b;
+            
+            t[7]= 70
+            o.x = 20
+            let cmp = 'x'
+            o[cmp]=30 // o['x'] -> o.x = 30
+            o.cmp = 50;
+            //delete o.x
+            with(o) {
+                x = 30
+                cmp = x + y
+            }
+            expect(t.length).toEqual(8)
+            var cont = 0
+            for(let val in o) {
+                o[val] = 0;
+                o.val = 0; // o['val'] = 0
+            }
+            for(let val of t) {
+                cont++;
+            }
+            expect(cont).toEqual(4)
+        })
+    })
 })
+*/
