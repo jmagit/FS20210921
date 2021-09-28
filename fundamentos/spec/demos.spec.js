@@ -1,5 +1,5 @@
 // 'use strict' 
-/*
+
 xdescribe('Demos de las pruebas', function() {
     describe('Calculos', function() {
         it('suma 2 + 2', function() {
@@ -139,4 +139,3 @@ xdescribe('Sintaxis', function() {
         })
     })
 })
-*/

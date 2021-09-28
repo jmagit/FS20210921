@@ -1,12 +1,13 @@
 function suma(a, b) {
     return a + b;
 }
-var suma = function (a, b) {
-    return a + b;
-}
+// var suma = function (a, b) {
+//     return a + b;
+// }
 function divide(a, b) {
     return a / b;
 }
+/*
 
 
 function kk() {
@@ -34,6 +35,7 @@ function opera(operador) {
         //default: return function() { return; }
     }
 }
+
 divide = 5;
 let fn = item => a + b;
 fn = function (item) { return a + b; }
@@ -151,3 +153,4 @@ MiClase.call(obj, "99", "Objeto de prueba");
 obj.prototype = MiClase.prototype
 var a = obj;
 
+*/

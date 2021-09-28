@@ -2,7 +2,7 @@ function suma(a, b) {
     return a + b;
 }
 function divide(a, b) {
-    debugger;
+    // debugger;
     return a / b;
 }
 
@@ -20,5 +20,5 @@ function opera(operador) {
     }
 }
 
-console.log(opera('/')(2, 2))
-console.error('Esto es un error')
+console.log(`Resultado: ${opera('/')(2, 2)}`)
+console.error('Esto es un error de ejemplo')
