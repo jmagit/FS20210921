@@ -1,4 +1,4 @@
-@import url("../node_modules/@fortawesome/fontawesome-free/css/all.css");
+@import url("../../node_modules/@fortawesome/fontawesome-free/css/all.css");
 @font-face {
   font-family: "Principal";
   src: url("Honey Baby.ttf") format("truetype"), url("Honey Baby.woff") format("woff"), url("Honey Baby.woff2") format("woff"), url("Honey Baby.otf") format("opentype");

@@ -1,4 +1,4 @@
-'use strict' 
+// 'use strict' 
 
 describe('Demos de las pruebas', function() {
     describe('Calculos', function() {
@@ -61,20 +61,20 @@ const count = 0;
 
 fdescribe('Sintaxis', function() {
     describe('Ejemplos 1', function() {
-        it('Operadores', function() {
+        xit('Operadores', function() {
             function kk() {
                 var i = 1;
                 if(true) {
-                    let j=2;
+                    var j=2;
                 }
                 c = i + j;
                 return c;
             }
             const calc = 2 + 2;
-            calc = 4;
+            // calc = 4;
 
             // var j = 1;
-
+            
             expect(c === kk()).toBeTrue()
 
             impresiones= 4;
@@ -89,9 +89,9 @@ fdescribe('Sintaxis', function() {
             a *= 2
             b = '2'
             b = 'a'
-            a += impresoones
+            a += impresiones
             rlst = ++b;
-            rlst = a > 0 | a = 1;
+            // rlst = a > 0 | a = 1;
             expect(+a + +b == 4).toBeTruthy()
             //expect(a + b).toEqual(22)
             b = 2
