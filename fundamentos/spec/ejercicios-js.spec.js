@@ -51,18 +51,63 @@ fdescribe('Verificacion de los ejercicios de JavaScript', () => {
 
     describe('Ejercicio 2: Adivina el Número', () => {
         let juego = null;
+        const NUM_INTENTOS = 10;
 
         beforeAll(() => {
-            spyOn(Math, 'random').and.returnValues(0.83435)
+            spyOn(Math, 'random').and.returnValue(0.83435)
         });
 
         beforeEach(() => {
-
+            juego = new JuegoConClase(NUM_INTENTOS, 100);
         });
 
-        it('Mayor', () => {
-            
+        it('Mi número es mayor.', () => {
+            juego.PruebaCon(82)
+            expect(juego.mensaje).toBe('Mi número es mayor.')
+            expect(juego.intentos).toBe(1)
+            expect(juego.encontrado).toBeFalse()
         });
+
+        it('Mi número es menor.', () => {
+            juego.PruebaCon(84)
+            juego.PruebaCon(84)
+            expect(juego.mensaje).toBe('Mi número es menor.')
+            expect(juego.intentos).toBe(2)
+            expect(juego.encontrado).toBeFalse()
+        });
+
+        it('Intentos', () => {
+            for(let i = 1; i < NUM_INTENTOS; i++) {
+                juego.PruebaCon(1)
+                expect(juego.intentos).toBe(i)
+            }
+            juego.PruebaCon(1)
+            expect(juego.mensaje).toBe('Upsss! Se acabaron los intentos, el número era el 83')
+            expect(juego.intentos).toBe(NUM_INTENTOS)
+            expect(juego.encontrado).toBeFalse()
+        });
+
+        it('Bieeen!!! Acertaste.', () => {
+            juego.PruebaCon(83)
+            expect(juego.mensaje).toBe('Bieeen!!! Acertaste.')
+            expect(juego.encontrado).toBeTrue()
+        });
+
+        it('Excedido el numero de intentos', () => {
+            for(let i = 0; i < NUM_INTENTOS; i++) {
+                juego.PruebaCon(1)
+            }
+            expect(() => juego.PruebaCon(1)).toThrow()
+            expect(juego.intentos).toBe(NUM_INTENTOS)
+            expect(juego.encontrado).toBeFalse()
+        });
+
+        xit('No es un número', () => {
+            juego.PruebaCon('otra cosa')
+            expect(juego.intentos).toBe(0)
+            expect(juego.encontrado).toBeFalse()
+        });
+
     })
 
     describe('Ejercicio 3: Crear una función que devuelva un array con el numero de elementos indicado, inicializados al valor suministrado.', () => {

@@ -175,7 +175,7 @@ function Juego(maxIntentos, valores) {
 }
 
 //Juego.prototype.DameMaxIntentos = function() { return maxIntentos; }
-//Juego.prototype.DameIntento = function () { return this.intentos + 1; }
+Juego.prototype.DameIntento = function () { return this.intentos + 1; }
 
 class JuegoConClase {
     #maxIntentos;
