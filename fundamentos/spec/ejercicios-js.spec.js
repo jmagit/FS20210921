@@ -49,6 +49,22 @@ fdescribe('Verificacion de los ejercicios de JavaScript', () => {
         })
     })
 
+    describe('Ejercicio 2: Adivina el Número', () => {
+        let juego = null;
+
+        beforeAll(() => {
+            spyOn(Math, 'random').and.returnValues(0.83435)
+        });
+
+        beforeEach(() => {
+
+        });
+
+        it('Mayor', () => {
+            
+        });
+    })
+
     describe('Ejercicio 3: Crear una función que devuelva un array con el numero de elementos indicado, inicializados al valor suministrado.', () => {
         [
             { elemetos: 10, valor: '' },
@@ -113,8 +129,8 @@ fdescribe('Verificacion de los ejercicios de JavaScript', () => {
             })
         });
 
-        ['12345678', 'Z', '1234J'].forEach(caso => {
-            it(`NIF valido: ${caso}`, () => {
+        ['12345678', 'Z', '1234J', null, undefined, ''].forEach(caso => {
+            it(`NIF invalido: ${caso}`, () => {
                 expect(esNIF(caso)).toBeFalse()
             })
         });

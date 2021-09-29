@@ -44,33 +44,33 @@ function dameArray(numeroElementos, valorPorDefecto = "", ...resto) {
     return rslt;
 }
 
-// function damePrimos(num) {
-//     var calculos = 0;
-//     var cuantos = +num;
-//     var rslt = [];
-//     var candidato = 2;
-//     while (cuantos) {
-//         while (true) {
-//             var esPrimo = true;
-//             for (var indice in rslt) {
-//                 calculos++;
-//                 if (candidato % rslt[indice] == 0) {
-//                     esPrimo = false;
-//                     break;
-//                 }
-//             }
+function damePrimos(num) {
+    var calculos = 0;
+    var cuantos = +num;
+    var rslt = [];
+    var candidato = 2;
+    while (cuantos) {
+        while (true) {
+            var esPrimo = true;
+            for (var indice in rslt) {
+                calculos++;
+                if (candidato % rslt[indice] == 0) {
+                    esPrimo = false;
+                    break;
+                }
+            }
 
-//             candidato++;
-//             if (esPrimo) {
-//                 rslt.push(candidato - 1);
-//                 break;
-//             }
-//         }
-//         cuantos--;
-//     }
-//     console.log('Calculos: ' + calculos);
-//     return rslt;
-// }
+            candidato++;
+            if (esPrimo) {
+                rslt.push(candidato - 1);
+                break;
+            }
+        }
+        cuantos--;
+    }
+    console.log('Calculos: ' + calculos);
+    return rslt;
+}
 
 
 function getPrimos(num) {
@@ -112,16 +112,16 @@ function getPrimos(num) {
     }
 }
 
-function damePrimos(num) {
-    var rslt = [];
-    for (let p of getPrimos(num)) {
-        rslt.push(p)
-    }
-    return rslt;
-}
+// function damePrimos(num) {
+//     var rslt = [];
+//     for (let p of getPrimos(num)) {
+//         rslt.push(p)
+//     }
+//     return rslt;
+// }
 
 function esNIF(nif) {
-    if (!nif || !/^\d{1,8}[A-Za-z]$/.test(nif))
+    if (!/^\d{1,8}[A-Za-z]$/.test(nif))
         return false;
     const letterValue = nif.substr(nif.length - 1);
     const numberValue = nif.substr(0, nif.length - 1);
