@@ -154,16 +154,30 @@ fdescribe('Verificacion de los ejercicios de JavaScript', () => {
                 expect(rslt[i]).toBe(primos[i])
         });
 
-        xit('Ver en consola', () => {
-            let primos = getPrimos(100)
+        const NUM_PRIMOS = 1000
+        function evalua(primos, tipo) {
+            let rslt = 0, count = 0;
+            // for (let p of primos) {
+            //     // console.log(p)
+            //     rslt += p;
+            //     count++;
+            //     if (p > 1000) break;
+            // }
+            console.log(`Suma ${tipo}-> sum: ${rslt} count: ${count}`)
             for (let p of primos) {
-                console.log(p)
-                if (p > 100) break;
+                // console.log(p)
+                count++;
+                rslt += p;
             }
-            console.log('------------')
-            for (let p of primos) {
-                console.log(p)
-            }
+            console.log(`Suma ${tipo}-> sum: ${rslt} count: ${count}`)
+
+        }
+        xit('Rendimiento Iterator', () => {
+            evalua(primosIterator(NUM_PRIMOS), 'Iterator')
+        })
+
+        xit('Rendimiento Generator', () => {
+            evalua(primosGenerator(NUM_PRIMOS), 'Generator')
         })
     })
 

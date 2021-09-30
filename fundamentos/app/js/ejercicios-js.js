@@ -36,55 +36,84 @@ function JuegoDelNumero() {
 function dameArray(numeroElementos, valorPorDefecto = "", ...resto) {
     var rslt = [];
     for (var ind = 0; ind < numeroElementos; ind++) {
-        if(resto.length > ind)
+        if (resto.length > ind)
             rslt[ind] = resto[ind];
-        else 
+        else
             rslt[ind] = valorPorDefecto;
     }
     return rslt;
 }
 
-function damePrimos(num) {
+// function damePrimos(num) {
+//     var calculos = 0;
+//     var cuantos = +num;
+//     var rslt = [];
+//     var candidato = 2;
+//     while (cuantos) {
+//         while (true) {
+//             var esPrimo = true;
+//             for (var indice in rslt) {
+//                 calculos++;
+//                 if (candidato % rslt[indice] == 0) {
+//                     esPrimo = false;
+//                     break;
+//                 }
+//             }
+
+//             candidato++;
+//             if (esPrimo) {
+//                 rslt.push(candidato - 1);
+//                 break;
+//             }
+//         }
+//         cuantos--;
+//     }
+//     console.log('Calculos: ' + calculos);
+//     return rslt;
+// }
+
+function* primosGenerator(num) {
     var calculos = 0;
     var cuantos = +num;
     var rslt = [];
-    var candidato = 2;
-    while (cuantos) {
-        while (true) {
-            var esPrimo = true;
-            for (var indice in rslt) {
-                calculos++;
-                if (candidato % rslt[indice] == 0) {
-                    esPrimo = false;
-                    break;
-                }
-            }
-
-            candidato++;
-            if (esPrimo) {
-                rslt.push(candidato - 1);
+    var candidato = 1;
+    while (true) {
+        var esPrimo = true;
+        candidato++;
+        for (var indice in rslt) {
+            calculos++;
+            if (candidato % rslt[indice] == 0) {
+                esPrimo = false;
                 break;
             }
         }
-        cuantos--;
+        if (esPrimo) {
+            rslt.push(candidato)
+            if (cuantos-- == 0) {
+                console.log(`Coste Generator: ${new Intl.NumberFormat('es-ES').format(calculos)}`)
+                return candidato
+            }
+            yield candidato;
+        }
     }
-    console.log('Calculos: ' + calculos);
-    return rslt;
 }
 
-
-function getPrimos(num) {
-    return  {
-        rslt : [],
+function primosIterator(num) {
+    return {
+        rslt: [],
         next: function () {
-            if(this.limite <= this.actual) 
-                return { done: true}
-            
+            if (this.limite <= this.actual) {
+                this.calculos++;
+                console.log(`Coste Iterator: ${new Intl.NumberFormat('es-ES').format(this.calculos)}`)
+                return { done: true }
+            }
             while (true) {
                 var esPrimo = true;
-                if(this.actual < this.rslt.length) {
+                this.candidato++;
+                if (this.actual < this.rslt.length) {
+                    this.calculos++;
                     this.candidato = this.rslt[this.actual++]
-                    return { done: false, value: this.candidato++}
+                    return { done: false, value: this.candidato }
                 }
                 for (var indice in this.rslt) {
                     this.calculos++;
@@ -93,32 +122,30 @@ function getPrimos(num) {
                         break;
                     }
                 }
-    
-                this.candidato++;
                 if (esPrimo) {
-                    this.rslt.push(this.candidato - 1);
+                    this.rslt.push(this.candidato);
                     this.actual++;
-                    return { done: false, value: this.candidato - 1}
+                    return { done: false, value: this.candidato }
                 }
             }
         },
-        [Symbol.iterator]: function () { 
+        [Symbol.iterator]: function () {
             this.calculos = 0
             this.actual = 0;
             this.limite = num;
-            this.candidato = 2
-            return this; 
+            this.candidato = 1
+            return this;
         }
     }
 }
 
-// function damePrimos(num) {
-//     var rslt = [];
-//     for (let p of getPrimos(num)) {
-//         rslt.push(p)
-//     }
-//     return rslt;
-// }
+function damePrimos(num) {
+    var rslt = [];
+    for (let p of primosIterator(num)) {
+        rslt.push(p)
+    }
+    return rslt;
+}
 
 function esNIF(nif) {
     if (!/^\d{1,8}[A-Za-z]$/.test(nif))
@@ -129,10 +156,10 @@ function esNIF(nif) {
 }
 
 function esPalindromo(cadena) {
-    if(typeof(cadena) != "string" || cadena.trim().length == 0) return false;
+    if (typeof (cadena) != "string" || cadena.trim().length == 0) return false;
     cadena = cadena.replace(/[ .,;:#¿?¡!()\[\]{}=+\-\*\/_`~$%\^&'"]/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase();
-    for(let i = 0; i < cadena.length - i; i++) {
-        if(cadena.charAt(i) !== cadena.charAt(cadena.length - 1 - i)) return false;
+    for (let i = 0; i < cadena.length - i; i++) {
+        if (cadena.charAt(i) !== cadena.charAt(cadena.length - 1 - i)) return false;
     }
     return true;
 }
@@ -214,7 +241,7 @@ class JuegoConClase {
     };
 
     DameMaxIntentos() { return this.#maxIntentos; }
-    
+
     get maxIntentos() { return this.#maxIntentos; };
 
     get intento() { return this.intentos + 1; }
