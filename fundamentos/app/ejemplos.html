@@ -1,18 +1,63 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejemplos</title>
 </head>
+
 <body>
     <h1>Mira la consola</h1>
+    <button id="btnPide">Pide</button>
+    <output id="resultado">
 
-    <script src="js/ejemplos.js"></script>
+    </output>
+    <!-- <script src="js/ejemplos.js"></script> -->
     <script>
         // console.log(opera('/')(2, 2))
         // console.error('Esto es un error')
+        // btnPide.addEventListener('click', () => {
+        //     let xmlhttp = new XMLHttpRequest();
+        //     xmlhttp.onreadystatechange = function () {
+        //         if (xmlhttp.readyState == 4)
+        //             if (xmlhttp.status == 200) {
+        //                 let lst = JSON.parse(xmlhttp.responseText);
+        //                 let rslt = '<ul>';
+        //                 // for (let item of lst) {
+        //                 //     rslt += `<li>${item.nombre} ${item.apellidos}</li>`;
+        //                 // }
+        //                 lst.forEach(item => {
+        //                     rslt += `<li>${item.nombre} ${item.apellidos}</li>`;
+        //                 });
+        //                 rslt += '</ul>';
+        //                 resultado.innerHTML = rslt;
+        //             } else {
+        //                 // Tratamiento de excepción
+        //             }
+        //     };
+        //     xmlhttp.open("GET", "http://127.0.0.1:5500/app/api/personas.json");
+        //     xmlhttp.send()
+
+        // })
+        btnPide.addEventListener('click', () => {
+            fetch('http://127.0.0.1:5500/app/api/personas.json').then(
+                resp => {
+                    resp.json().then(lst => {
+                        let rslt = '<ul>';
+                        lst.forEach(item => {
+                            rslt += `<li>${item.nombre} ${item.apellidos}</li>`;
+                        });
+                        rslt += '</ul>';
+                        resultado.innerHTML = rslt;
+                    })
+                },
+                err => {
+
+                })
+        })
     </script>
 </body>
+
 </html>
