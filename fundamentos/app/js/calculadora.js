@@ -18,13 +18,13 @@ function Calculadora(fnPantalla, fnResumen) {
 	ref.onResumenChange = fnResumen;
 	
 	function pintaPantalla() {
-		if (typeof(fnPantalla) !== 'function') return;
 		ref.pantalla = miPantalla;
+		if (typeof(fnPantalla) !== 'function') return;
 		ref.onPantallaChange(miPantalla);
 	}
 	function pintaResumen() {
-		if (typeof (fnResumen) !== 'function') return;
 		ref.resumen = miResumen;
+		if (typeof (fnResumen) !== 'function') return;
 		ref.onResumenChange(miResumen);
 	}
 
@@ -39,7 +39,7 @@ function Calculadora(fnPantalla, fnResumen) {
 	};
 	ref.inicia();
 
-	ref.ponDijito = function (value) {
+	ref.ponDigito = function (value) {
 		if (typeof (value) !== 'string')
 			value = value.toString();
 		if (value.length != 1 || value < '0' || value > '9') {

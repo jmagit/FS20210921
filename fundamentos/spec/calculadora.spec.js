@@ -25,6 +25,10 @@ describe('Pruebas de la calculadora', () => {
 		limpia();
 	});
 
+	afterEach(() => {
+		limpia();
+	});
+
 	describe('Controladores de eventos', () => {
 		it('Controladores: por constructor', () => {
 			let calc = new Calculadora(fnPantalla, fnResumen)
@@ -51,29 +55,29 @@ describe('Pruebas de la calculadora', () => {
 		})
 	});
 
-	describe('Método: ponDijito', () => {
+	describe('Método: ponDigito', () => {
 		'0123456789'.split('').forEach(digito => {
-			it(`ponDijito ${digito} como string`, () => {
-				calc.ponDijito(digito)
+			it(`ponDigito ${digito} como string`, () => {
+				calc.ponDigito(digito)
 				expect(pantalla).toBe(digito)
 			})
 		});
 		'a-,'.split('').forEach(digito => {
-			it(`ponDijito ${digito} como error`, () => {
-				calc.ponDijito(digito)
+			it(`ponDigito ${digito} como error`, () => {
+				calc.ponDigito(digito)
 				expect(pantallaHasCalled).toBeFalse()
 				expect(pantalla).toBeUndefined()
 			})
 		});
 		for (let digito = 0; digito <= 9; digito++) {
-			it(`ponDijito ${digito} como number`, () => {
-				calc.ponDijito(digito)
+			it(`ponDigito ${digito} como number`, () => {
+				calc.ponDigito(digito)
 				expect(pantalla).toBe(digito.toString())
 			})
 		}
 		['1234567890', '9876543210', '666'].forEach(caso => {
 			it(`Secuencia ${caso}`, () => {
-				caso.split('').forEach(digito => calc.ponDijito(digito));
+				caso.split('').forEach(digito => calc.ponDigito(digito));
 				expect(pantalla).toBe(caso)
 			})
 		});
@@ -86,7 +90,7 @@ describe('Pruebas de la calculadora', () => {
 				expect(pantalla).toBe(caso)
 			})
 		});
-		['a98765', '1234$', null, undefined, ''].forEach(caso => {
+		['$98765', '1234$', null, undefined, ''].forEach(caso => {
 			it(`Operando invalidos ${caso}`, () => {
 				calc.ponOperando(caso)
 				expect(pantalla).toBeUndefined()
@@ -96,22 +100,22 @@ describe('Pruebas de la calculadora', () => {
 
 	describe('Método: ponComa', () => {
 		it('Pone la coma', () => {
-			calc.ponDijito(1)
+			calc.ponDigito(1)
 			calc.ponComa()
-			calc.ponDijito(2)
+			calc.ponDigito(2)
 			expect(pantalla).toBe('1.2')
 		})
 
 		it('Repite la coma', () => {
 			calc.ponOperando('0.1')
 			calc.ponComa()
-			calc.ponDijito(2)
+			calc.ponDigito(2)
 			expect(pantalla).toBe('0.12')
 		})
 
 		it('Empieza por la coma', () => {
 			calc.ponComa()
-			calc.ponDijito(2)
+			calc.ponDigito(2)
 			expect(pantalla).toBe('0.2')
 		})
 	});
