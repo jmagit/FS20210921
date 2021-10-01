@@ -23,11 +23,15 @@
         <output id="txtMensaje"></output>
     </form>
 
-    <script src="js/ejercicios-js.js"></script>
-    <script>
-        (function () {
-            var juego = new JuegoConClase(10, 100);
+    <!-- <script src="js/ejercicios-js.js"></script> -->
+    <script type="module">
+        import elJuego, {esNIF}  from './js/ejercicios-js.js'
+        import {esNIF as valNif} from './js/biblioteca/validaciones.js'
 
+        (function () {
+            var juego = new elJuego(10, 100);
+            console.log(esNIF('nif'))
+            console.log(valNif('nif'))
             let lbPrompt = document.querySelector('#lbPrompt')
             let txtNumero = document.querySelector('#txtNumero')
             let btnJugar = document.querySelector('#btnJugar')

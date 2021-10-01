@@ -18,7 +18,7 @@ body {
   background-color: $principal-background-color;
   color: $principal-text-color;
   margin: 0;
-  font-family: "Principal";
+  //font-family: "Principal";
 }
 main {
   margin: 5px 10px;
@@ -86,6 +86,7 @@ main {
 
 .error-msg {
   color: $error-color;
+  background-color: $error-background-color;
 }
 
 .novedades {

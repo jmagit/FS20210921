@@ -1,3 +1,5 @@
+import { JuegoConClase, Juego } from '../app/js/ejercicios-js.js'
+
 describe('Verificacion de los ejercicios de JavaScript', () => {
     describe('Ejercicio 1: Crear una función que devuelva un numero aleatorio', () => {
         [[1, 100], [-10, -1] /*, [0, 10] */].forEach(caso => {
@@ -208,3 +210,19 @@ describe('Verificacion de los ejercicios de JavaScript', () => {
     });
 })
 
+fdescribe('Validaciones', () => {
+    describe('estaEnMayuscula', () => {
+        ['A', 'CASA', '1111', 'CAÑÓN', '', null, undefined].forEach(caso => {
+                it(`estaEnMayuscula valido: ${caso}`, () => {
+                    expect(estaEnMayuscula(caso)).toBeTrue()
+                })
+            });
+
+        [1, 'no lo es', 'CASi'].forEach(caso => {
+            it(`estaEnMayuscula invalido: ${caso}`, () => {
+                expect(estaEnMayuscula(caso)).toBeFalse()
+            })
+        });
+
+    })
+})
