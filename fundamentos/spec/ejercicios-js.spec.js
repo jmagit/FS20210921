@@ -1,4 +1,4 @@
-fdescribe('Verificacion de los ejercicios de JavaScript', () => {
+describe('Verificacion de los ejercicios de JavaScript', () => {
     describe('Ejercicio 1: Crear una función que devuelva un numero aleatorio', () => {
         [[1, 100], [-10, -1] /*, [0, 10] */].forEach(caso => {
             it(`Valor entre ${caso[0]} mas ${caso[1]}`, () => {
@@ -47,68 +47,69 @@ fdescribe('Verificacion de los ejercicios de JavaScript', () => {
                 expect(aleatorio(10, 20)).toBe(15)
             })
         })
-    })
+    });
 
-    describe('Ejercicio 2: Adivina el Número', () => {
-        let juego = null;
-        const NUM_INTENTOS = 10;
+    [JuegoConClase, Juego].forEach(caso => {
+        describe(`Ejercicio 2: Adivina el Número con ${caso.name}`, () => {
+            let juego = null;
+            const NUM_INTENTOS = 10;
 
-        beforeAll(() => {
-            spyOn(Math, 'random').and.returnValue(0.83435)
-        });
+            beforeAll(() => {
+                spyOn(Math, 'random').and.returnValue(0.83435)
+            });
 
-        beforeEach(() => {
-            juego = new JuegoConClase(NUM_INTENTOS, 100);
-        });
+            beforeEach(() => {
+                juego = new caso(NUM_INTENTOS, 100);
+            });
 
-        it('Mi número es mayor.', () => {
-            juego.PruebaCon(82)
-            expect(juego.mensaje).toBe('Mi número es mayor.')
-            expect(juego.intentos).toBe(1)
-            expect(juego.encontrado).toBeFalse()
-        });
+            it('Mi número es mayor.', () => {
+                juego.PruebaCon(82)
+                expect(juego.mensaje).toBe('Mi número es mayor.')
+                expect(juego.intentos).toBe(1)
+                expect(juego.encontrado).toBeFalse()
+            });
 
-        it('Mi número es menor.', () => {
-            juego.PruebaCon(84)
-            juego.PruebaCon(84)
-            expect(juego.mensaje).toBe('Mi número es menor.')
-            expect(juego.intentos).toBe(2)
-            expect(juego.encontrado).toBeFalse()
-        });
+            it('Mi número es menor.', () => {
+                juego.PruebaCon(84)
+                juego.PruebaCon(84)
+                expect(juego.mensaje).toBe('Mi número es menor.')
+                expect(juego.intentos).toBe(2)
+                expect(juego.encontrado).toBeFalse()
+            });
 
-        it('Intentos', () => {
-            for(let i = 1; i < NUM_INTENTOS; i++) {
+            it('Intentos', () => {
+                for (let i = 1; i < NUM_INTENTOS; i++) {
+                    juego.PruebaCon(1)
+                    expect(juego.intentos).toBe(i)
+                }
                 juego.PruebaCon(1)
-                expect(juego.intentos).toBe(i)
-            }
-            juego.PruebaCon(1)
-            expect(juego.mensaje).toBe('Upsss! Se acabaron los intentos, el número era el 83')
-            expect(juego.intentos).toBe(NUM_INTENTOS)
-            expect(juego.encontrado).toBeFalse()
-        });
+                expect(juego.mensaje).toBe('Upsss! Se acabaron los intentos, el número era el 83')
+                expect(juego.intentos).toBe(NUM_INTENTOS)
+                expect(juego.encontrado).toBeFalse()
+            });
 
-        it('Bieeen!!! Acertaste.', () => {
-            juego.PruebaCon(83)
-            expect(juego.mensaje).toBe('Bieeen!!! Acertaste.')
-            expect(juego.encontrado).toBeTrue()
-        });
+            it('Bieeen!!! Acertaste.', () => {
+                juego.PruebaCon(83)
+                expect(juego.mensaje).toBe('Bieeen!!! Acertaste.')
+                expect(juego.encontrado).toBeTrue()
+            });
 
-        it('Excedido el numero de intentos', () => {
-            for(let i = 0; i < NUM_INTENTOS; i++) {
-                juego.PruebaCon(1)
-            }
-            expect(() => juego.PruebaCon(1)).toThrow()
-            expect(juego.intentos).toBe(NUM_INTENTOS)
-            expect(juego.encontrado).toBeFalse()
-        });
+            it('Excedido el numero de intentos', () => {
+                for (let i = 0; i < NUM_INTENTOS; i++) {
+                    juego.PruebaCon(1)
+                }
+                expect(() => juego.PruebaCon(1)).toThrow()
+                expect(juego.intentos).toBe(NUM_INTENTOS)
+                expect(juego.encontrado).toBeFalse()
+            });
 
-        xit('No es un número', () => {
-            juego.PruebaCon('otra cosa')
-            expect(juego.intentos).toBe(0)
-            expect(juego.encontrado).toBeFalse()
-        });
+            it('No es un número', () => {
+                expect(() => juego.PruebaCon('otra cosa')).toThrow()
+                expect(() => juego.PruebaCon('100$')).toThrow()
+            });
 
-    })
+        })
+    });
 
     describe('Ejercicio 3: Crear una función que devuelva un array con el numero de elementos indicado, inicializados al valor suministrado.', () => {
         [
@@ -142,7 +143,7 @@ fdescribe('Verificacion de los ejercicios de JavaScript', () => {
             for (let i = 2; i < numElementos; i++)
                 expect(rslt[i]).toBe(true)
         });
-    })
+    });
 
     describe('Ejercicio 4: Crear una función que devuelva un determinado número de números primos.', () => {
         it('Números primos del 1 al 100', () => {
@@ -157,29 +158,24 @@ fdescribe('Verificacion de los ejercicios de JavaScript', () => {
         const NUM_PRIMOS = 1000
         function evalua(primos, tipo) {
             let rslt = 0, count = 0;
-            // for (let p of primos) {
-            //     // console.log(p)
-            //     rslt += p;
-            //     count++;
-            //     if (p > 1000) break;
-            // }
-            console.log(`Suma ${tipo}-> sum: ${rslt} count: ${count}`)
             for (let p of primos) {
                 // console.log(p)
                 count++;
                 rslt += p;
             }
             console.log(`Suma ${tipo}-> sum: ${rslt} count: ${count}`)
-
+            expect(count).toBe(NUM_PRIMOS)
         }
-        xit('Rendimiento Iterator', () => {
-            evalua(primosIterator(NUM_PRIMOS), 'Iterator')
+        it('Rendimiento Iterator', () => {
+            let iterador = primosIterator(NUM_PRIMOS);
+            evalua(iterador, 'Iterator')
+            evalua(iterador, 'Iterator')
         })
 
-        xit('Rendimiento Generator', () => {
+        it('Rendimiento Generator', () => {
             evalua(primosGenerator(NUM_PRIMOS), 'Generator')
         })
-    })
+    });
 
     describe('Ejercicio 6: Crear una función que valide un NIF.', () => {
         ['12345678z', '12345678Z', '1234S'].forEach(caso => {
@@ -193,7 +189,7 @@ fdescribe('Verificacion de los ejercicios de JavaScript', () => {
                 expect(esNIF(caso)).toBeFalse()
             })
         });
-    })
+    });
 
     describe('Ejercicio 7: Palíndromos.', () => {
         ['ana', 'reconocer', 'La ruta nos aporto otro paso natural', 'SOMOS O NO SOMOS',
@@ -209,6 +205,6 @@ fdescribe('Verificacion de los ejercicios de JavaScript', () => {
                 expect(esPalindromo(caso)).toBeFalse()
             })
         });
-    })
+    });
 })
 

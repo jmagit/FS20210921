@@ -181,6 +181,8 @@ function Juego(maxIntentos, valores) {
     this.PruebaCon = function (numeroIntroducido) {
         if (this.intentos >= maxIntentos)
             throw new Error("Excedido el numero de intentos");
+        if (!Number.isInteger(+numeroIntroducido))
+            throw new Error("No es un numero correcto");
         this.intentos += 1;
         if (numeroBuscado == numeroIntroducido) {
             this.encontrado = true;
@@ -222,6 +224,8 @@ class JuegoConClase {
     PruebaCon(numeroIntroducido) {
         if (this.intentos >= this.#maxIntentos)
             throw new Error("Excedido el numero de intentos");
+        if (!Number.isInteger(+numeroIntroducido))
+            throw new Error("No es un numero correcto");
         this.intentos += 1;
         if (this.#numeroBuscado == numeroIntroducido) {
             this.encontrado = true;

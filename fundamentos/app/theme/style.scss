@@ -1,4 +1,7 @@
+@use "sass:list";
 @use "variables" as *;
+$sizes: 576px, 768px, 992px, 1200px;
+
 @import url("../../node_modules/@fortawesome/fontawesome-free/css/all.css");
 @font-face {
   font-family: "Principal";
@@ -125,10 +128,9 @@ main {
       font-size: small;
     }
   }
-  $sizes: 576px, 768px, 992px, 1200px;
-  $delta: 0;
-  @each $ancho in $sizes {
-    @media (min-width: $ancho) {
+  
+  @for $delta from 0 to list.length($sizes) {
+    @media (min-width: list.nth($sizes, $delta + 1)) {
       &__cabecera {
         font-size: $cabecera-font-size + ($delta + 1) * 0.5em;
       }
@@ -137,8 +139,8 @@ main {
         font-size: 1em + $delta * 0.2em;
       }
     }
-    $delta: $delta + 1;
   }
+
   @media (max-width: 320px) {
     &__articulo-figure {
       display: none;
@@ -225,11 +227,73 @@ main {
   &__radio {
     flex-flow: row wrap;
   }
-  input, select, &__radio {
+  input,
+  select,
+  &__radio {
     width: 80%;
   }
   input[type="checkbox"],
   input[type="radio"] {
     max-width: 10%;
+  }
+}
+
+.Calculadora {
+  @mixin tamañoFont($factor: 0.3em) {
+    @for $delta from 0 to list.length($sizes) {
+      @media (min-width: list.nth($sizes, $delta + 1)) {
+        font-size: 1em + ($delta + 1) * $factor !important;
+      }
+    }
+  }
+  $fuente: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(4, 1fr);
+
+  background-color: #e6f3ff !important;
+  border-style: outset !important;
+  padding: 6px !important;
+  margin: 4px !important;
+  max-width: 100%;
+  min-width: 150px;
+  font: $fuente;
+
+  @for $delta from 1 to list.length($sizes) {
+    @media (min-width: list.nth($sizes, $delta + 1)) {
+      max-width: 300px + $delta * 200px;
+    }
+  }
+
+  .Pantalla {
+    grid-column: 1 / span 4;
+    background-color: #004000;
+    color: yellow;
+    border-style: inset !important;
+    text-align: right !important;
+    padding: 4px !important;
+    @include tamañoFont(1em);
+  }
+
+  .Resumen {
+    grid-column: 1 / span 4;
+    text-align: right !important;
+    @include tamañoFont(0.7em);
+  }
+  @mixin botones {
+    width: 100%;
+    font: $fuente;
+    @include tamañoFont;
+  }
+
+  .btnDigito {
+    color: navy;
+    @include botones;
+  }
+
+  .btnOperar {
+    color: red;
+    @include botones;
   }
 }
