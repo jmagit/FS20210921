@@ -18,7 +18,7 @@ export class DemosComponent implements OnInit {
   resultado: string | null = null;
   visible = true;
   estetica = { importante: true, error: false, urgente: true };
-  fontSize = 14;
+  fontSize = 18;
 
   constructor() { }
 
