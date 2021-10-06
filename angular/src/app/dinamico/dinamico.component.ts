@@ -10,9 +10,9 @@ import { HomeComponent } from '../home/home.component';
 })
 export class DinamicoComponent implements OnInit {
   menu = [
-    { texto: 'calculadora', icono: '', componente: CalculadoraComponent },
-    { texto: 'inicio', icono: '', componente: HomeComponent },
-    { texto: 'demos', icono: '', componente: DemosComponent },
+    { texto: 'demos', icono: 'fas fa-chalkboard-teacher', componente: DemosComponent },
+    { texto: 'inicio', icono: 'fas fa-home', componente: HomeComponent },
+    { texto: 'calculadora', icono: 'fas fa-calculator', componente: CalculadoraComponent },
   ];
 
   actual = this.menu[0].componente;
