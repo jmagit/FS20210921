@@ -23,3 +23,5 @@ export class ToComaDecimalPipe implements PipeTransform {
     return value;
   }
 }
+
+export const PIPES_CADENAS = [ ElipsisPipe, ToComaDecimalPipe, ];
