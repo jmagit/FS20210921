@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { LoggerService } from 'src/lib/my-core';
 
 @Component({
   selector: 'calculadora',
@@ -14,7 +15,7 @@ export class CalculadoraComponent implements OnInit {
   private miPantalla = '0'
   private miResumen = '';
 
-  constructor() {
+  constructor(private log: LoggerService) {
     this.inicia();
   }
 
@@ -35,7 +36,7 @@ export class CalculadoraComponent implements OnInit {
     if (value !== this.separadorDecimal && (value === '.' || value === ',')) {
       this.separadorDecimal = value;
     } else {
-      console.error('Separador decimal no reconocido.');
+      this.log.error('Separador decimal no reconocido.');
     }
   }
 
@@ -51,7 +52,7 @@ export class CalculadoraComponent implements OnInit {
     if (typeof (value) !== 'string')
       value = value.toString();
     if (value.length != 1 || value < '0' || value > '9') {
-      console.error('No es un valor numerico.');
+      this.log.error('No es un valor numerico.');
       return;
     }
     if (this.limpiar || this.miPantalla == '0') {
@@ -66,7 +67,7 @@ export class CalculadoraComponent implements OnInit {
       this.miPantalla = value.toString();
       this.limpiar = false;
     } else {
-      console.error('No es un valor numerico.');
+      this.log.error('No es un valor numerico.');
     }
   };
 
@@ -77,7 +78,7 @@ export class CalculadoraComponent implements OnInit {
     } else if (this.miPantalla.indexOf('.') === -1) {
       this.miPantalla += '.';
     } else
-      console.warn('Ya está la coma');
+      this.log.warn('Ya está la coma');
   }
 
   borrar(): void {
@@ -97,7 +98,7 @@ export class CalculadoraComponent implements OnInit {
 
   calcula(value: string): void {
     if ('+-*/='.indexOf(value) == -1) {
-      console.error(`Operacion no soportada: ${value}`);
+      this.log.error(`Operacion no soportada: ${value}`);
       return;
     }
 
