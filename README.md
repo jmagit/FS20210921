@@ -56,3 +56,12 @@ Cuaquleir tetxo se pduee leer... si se respetan la primera y la última letra de
 
 1. Calculadora.
 2. Validar formulario de clientes.
+
+
+## Angular
+
+1. Reproducir la calculadora
+2. Reproducir el formulario de Clientes en el componente ClienteFormulario
+3. Crear módulo CommonComponent (export, import)
+    a. Crear componente FormButtons con los botones de Enviar y Volver (@output: send, cancel)
+    b. Crear componente ShowErrorsMessages que muestre los errores de validación (@input: cntr.errors)
