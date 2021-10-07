@@ -80,7 +80,7 @@ export class CalculadoraComponent implements OnInit {
       this.miPantalla += '.';
     } else {
       this.notify.add('Ya está la coma', NotificationType.warn)
-      this.log.warn('Ya está la coma');
+      // this.log.warn('Ya está la coma');
     }
   }
 
