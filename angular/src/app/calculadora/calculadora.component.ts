@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { LoggerService } from 'src/lib/my-core';
+import { NotificationService, NotificationType } from '../common-services';
 
 @Component({
   selector: 'calculadora',
@@ -15,7 +16,7 @@ export class CalculadoraComponent implements OnInit {
   private miPantalla = '0'
   private miResumen = '';
 
-  constructor(private log: LoggerService) {
+  constructor(private log: LoggerService, private notify: NotificationService) {
     this.inicia();
   }
 
@@ -77,8 +78,10 @@ export class CalculadoraComponent implements OnInit {
       this.limpiar = false;
     } else if (this.miPantalla.indexOf('.') === -1) {
       this.miPantalla += '.';
-    } else
+    } else {
+      this.notify.add('Ya está la coma', NotificationType.warn)
       this.log.warn('Ya está la coma');
+    }
   }
 
   borrar(): void {

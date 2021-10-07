@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ERROR_LEVEL, LoggerService } from 'src/lib/my-core';
+import { NotificationService } from '../common-services';
 
 @Component({
   selector: 'app-demos',
@@ -23,7 +24,7 @@ export class DemosComponent implements OnInit {
   estetica = { importante: true, error: false, urgente: true };
   fontSize = 18;
 
-  constructor(private log: LoggerService) {
+  constructor(private log: LoggerService, public vm: NotificationService) {
     log.error('Es un error');
     log.warn('Es un warn');
     log.info('Es un info');
