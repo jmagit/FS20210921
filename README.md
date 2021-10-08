@@ -67,3 +67,9 @@ Cuaquleir tetxo se pduee leer... si se respetan la primera y la última letra de
     a. Crear componente FormButtons con los botones de Enviar y Volver (@output: send, cancel - @input: send-disabled)
 
     b. Crear componente ShowErrorsMessages que muestre los errores de validación (@input: errors)
+4. Convertir ShowErrorsMessages en una directiva
+5. Crear directivas de validación:
+
+    - IBAN, 
+    - greater-than, 
+    - before, after, future, futureOrPresent, past, ...
