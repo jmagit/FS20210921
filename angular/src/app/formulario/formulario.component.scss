@@ -21,3 +21,7 @@ form .ng-invalid {
 form .ng-invalid-parse {
   transition: all linear 1s;
 }
+
+.pressed {
+  border-color: red !important;
+}

@@ -29,7 +29,7 @@
     <div class="col-md-6">
       <label class="form-label" for="email">Correo</label>
       <input type="email" class="form-control" [class.is-invalid]="email.invalid" id="email" name="email"
-        [(ngModel)]="vm.Elemento.email" #email="ngModel" placeholder="Correo electrónico" required>
+        [(ngModel)]="vm.Elemento.email" #email="ngModel" placeholder="Correo electrónico" required email minlength="3">
       <app-show-errors-messages [errors]="email.errors"></app-show-errors-messages>
     </div>
     <fieldset class="col-md-3">
@@ -66,6 +66,6 @@
     </div>
   </div>
   <div class="row">
-    <app-form-buttons (send)="vm.send()" [send-disabled]="miForm.invalid" (cancel)="vm.cancel()"></app-form-buttons>
+    <app-form-buttons (send)="vm.send()" [send-disabled]="miForm.invalid" (cancel)="vm.cancel()" (delete)="vm.delete()"></app-form-buttons>
   </div>
 </form>

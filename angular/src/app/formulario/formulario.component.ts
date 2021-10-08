@@ -43,7 +43,7 @@ export class PersonasViewModel {
   }
 
   public delete() {
-
+    this.notify.add('Borrado');
   }
 
   public cancel() {
