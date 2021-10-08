@@ -1,7 +1,8 @@
+<app-card>Esto si que se conserva</app-card>
 <div class="container theme-dark">
   <div class="row">
     <div class="col">
-      <calculadora [SeparadorDecimal]="','" (updated)="ponResultado('IZQ', $event)"></calculadora>
+      <calculadora [SeparadorDecimal]="','" (updated)="ponResultado('IZQ', $event)">Esto se pierde</calculadora>
     </div>
     <table class="col table table-striped">
       <thead>

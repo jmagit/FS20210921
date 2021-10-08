@@ -5,14 +5,17 @@
 </div>
 <form #miForm="ngForm">
   <div>
-    <label for="id">Código</label>
-    <input type="number" id="id" name="id" [(ngModel)]="vm.Elemento.id" #id="ngModel" required min="0" >
-    <output class="error" [hidden]="!id.hasError('required') || miForm.pristine">Es obligatorio. </output>
+    <label for="id">Código: </label>
+    <ng-container *ngIf="vm.IsAdd">
+      <input type="number" id="id" name="id" [(ngModel)]="vm.Elemento.id" #id="ngModel" required min="0" >
+      <output class="error" [hidden]="!id.hasError('required') || miForm.pristine">Es obligatorio. </output>
+    </ng-container>
+    <ng-container *myUnless="vm.IsAdd">{{vm.Elemento.id}}</ng-container>
   </div>
   <div>
     <label for="nombre">Nombre</label>
     <input type="text" id="nombre" name="nombre" [(ngModel)]="vm.Elemento.nombre" #nombre="ngModel"
-      required minlength="2" maxlength="10" >
+      required minlength="2" maxlength="10" uppercase >
     <app-show-errors-messages [errors]="nombre.errors"></app-show-errors-messages>
     <!-- <output class="error" [myShowErrors]="nombre.errors"></output> -->
     <!-- <output class="error" [hidden]="!nombre.errors?.required">Es obligatorio. </output>
@@ -22,13 +25,14 @@
   <div>
     <label for="apellidos">Apellidos</label>
     <input type="text" id="apellidos" name="apellidos" [(ngModel)]="vm.Elemento.apellidos" #apellidos="ngModel"
-      minlength="2" maxlength="10" >
-    <output class="error" [hidden]="!apellidos.errors?.minlength && !apellidos.errors?.maxlength">Debe tener entre 2 y 10 letras. </output>
+      minlength="2" maxlength="10" equalsTo="nombre" >
+    <!-- <output class="error" [hidden]="!apellidos.errors?.minlength && !apellidos.errors?.maxlength">Debe tener entre 2 y 10 letras. </output> -->
+    <app-show-errors-messages [errors]="apellidos.errors"></app-show-errors-messages>
   </div>
   <div>
     <label for="correo">Correo</label>
     <input type="email" id="correo" name="correo" [(ngModel)]="vm.Elemento.correo" #correo="ngModel"
-      minlength="3" maxlength="100" email >
+      minlength="3" maxlength="100" >
     <app-show-errors-messages [errors]="correo.errors"></app-show-errors-messages>
     <!-- <output class="error" [hidden]="!correo.errors?.email">No es un correo electrónico valido. </output> -->
   </div>
@@ -41,7 +45,8 @@
   </div>
   <div>
     <label for="dni">DNI</label>
-    <input type="text" id="dni" name="dni" [(ngModel)]="vm.Elemento.dni" #dni="ngModel" >
+    <input type="text" id="dni" name="dni" [(ngModel)]="vm.Elemento.dni" #dni="ngModel" nif>
+    <app-show-errors-messages [errors]="dni.errors"></app-show-errors-messages>
   </div>
   <!-- <div>
     <input type="button" value="enviar" (click)="vm.send()" [disabled]="miForm.invalid" >
