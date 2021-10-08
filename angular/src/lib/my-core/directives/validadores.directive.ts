@@ -106,4 +106,27 @@ export class EqualValidator implements Validator {
   }
 }
 
-export const MIS_VALIDADORES = [UppercaseValidator, NIFValidator, TypeValidator, EqualValidator, ]
+export function BeforeValidation(limite: string): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (!control.value) { return null; }
+    let fechaLimite = (new Date(limite)).valueOf();
+    let fechaIntroducida = (new Date(control.value)).valueOf();
+    if(isNaN(fechaLimite))
+      throw new Error('No es una fecha correcta')
+    return !isNaN(fechaIntroducida) && fechaIntroducida < fechaLimite ? null : { before: `Tiene que ser anterior a la fecha anterior al ${(new Date(limite)).toLocaleDateString()}` }
+  };
+}
+
+@Directive({
+  selector: '[before][formControlName],[before][formControl],[before][ngModel]',
+  providers: [{ provide: NG_VALIDATORS, useExisting: BeforeValidator, multi: true }]
+})
+export class BeforeValidator implements Validator {
+  @Input() before = ''
+
+  validate(control: AbstractControl): ValidationErrors | null {
+    return BeforeValidation(this.before)(control);
+  }
+}
+
+export const MIS_VALIDADORES = [UppercaseValidator, NIFValidator, TypeValidator, EqualValidator, BeforeValidator ]

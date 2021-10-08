@@ -54,7 +54,7 @@
     <div class="col-md-3">
       <label class="form-label" for="last_update">Última modificacion</label>
       <input type="date" class="form-control" [class.is-invalid]="last_update.invalid" id="last_update"
-        name="last_update" [(ngModel)]="vm.Elemento.last_update" #last_update="ngModel" min="2021-11-01">
+        name="last_update" [(ngModel)]="vm.Elemento.last_update" #last_update="ngModel" before="2021-10-01">
       <app-show-errors-messages [errors]="last_update.errors"></app-show-errors-messages>
     </div>
     <div class="col-md-3 form-check form-switch">
