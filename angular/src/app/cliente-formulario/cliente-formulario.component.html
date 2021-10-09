@@ -1,4 +1,4 @@
-<form #miForm="ngForm">
+<form #miForm="ngForm" cross-field-validation>
   <div class="row">
     <div class="col-md-2">
       <label class="form-label" for="customer_id">Código</label>
@@ -17,7 +17,7 @@
     <div class="col-md-6">
       <label class="form-label" for="first_name">Nombre</label>
       <input type="text" class="form-control" [class.is-invalid]="first_name.invalid" id="first_name" name="first_name"
-        [(ngModel)]="vm.Elemento.first_name" #first_name="ngModel" required minlength="2" maxlength="50">
+        [(ngModel)]="vm.Elemento.first_name" #first_name="ngModel" notblank minlength="2" maxlength="50">
       <app-show-errors-messages [errors]="first_name.errors"></app-show-errors-messages>
     </div>
     <div class="col-md-6">
@@ -29,7 +29,7 @@
     <div class="col-md-6">
       <label class="form-label" for="email">Correo</label>
       <input type="email" class="form-control" [class.is-invalid]="email.invalid" id="email" name="email"
-        [(ngModel)]="vm.Elemento.email" #email="ngModel" placeholder="Correo electrónico" required email minlength="3">
+        [(ngModel)]="vm.Elemento.email" #email="ngModel" placeholder="Correo electrónico" required minlength="3">
       <app-show-errors-messages [errors]="email.errors"></app-show-errors-messages>
     </div>
     <fieldset class="col-md-3">
@@ -48,13 +48,14 @@
     <div class="col-md-3">
       <label class="form-label" for="create_date">F. Creación</label>
       <input type="date" class="form-control" [class.is-invalid]="create_date.invalid" id="create_date"
-        name="create_date" [(ngModel)]="vm.Elemento.create_date" #create_date="ngModel">
+        name="create_date" [(ngModel)]="vm.Elemento.create_date" #create_date="ngModel" pastOrPresent>
       <app-show-errors-messages [errors]="create_date.errors"></app-show-errors-messages>
     </div>
     <div class="col-md-3">
       <label class="form-label" for="last_update">Última modificacion</label>
       <input type="date" class="form-control" [class.is-invalid]="last_update.invalid" id="last_update"
-        name="last_update" [(ngModel)]="vm.Elemento.last_update" #last_update="ngModel" before="2021-10-01">
+        name="last_update" [(ngModel)]="vm.Elemento.last_update" #last_update="ngModel" pastOrPresent
+        greaterOrEqualsThan="create_date" greaterOrEqualsThanMessage="No se puede haber sido modificado antes de crearlo">
       <app-show-errors-messages [errors]="last_update.errors"></app-show-errors-messages>
     </div>
     <div class="col-md-3 form-check form-switch">

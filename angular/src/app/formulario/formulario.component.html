@@ -3,7 +3,7 @@
   <input type="button" value="edit" (click)="vm.edit()" >
   <input type="button" value="borrar" (myWinConfirm)="vm.delete()" myWinConfirmMessage="Una vez borrados ..." >
 </div>
-<form #miForm="ngForm">
+<form #miForm="ngForm" cross-field-validation>
   <div>
     <label for="id">Código: </label>
     <ng-container *ngIf="vm.IsAdd">
@@ -25,7 +25,7 @@
   <div>
     <label for="apellidos">Apellidos</label>
     <input type="text" id="apellidos" name="apellidos" [(ngModel)]="vm.Elemento.apellidos" #apellidos="ngModel"
-      minlength="2" maxlength="10" equalsTo="nombre" >
+      minlength="2" maxlength="10" distinctTo="nombre" >
     <!-- <output class="error" [hidden]="!apellidos.errors?.minlength && !apellidos.errors?.maxlength">Debe tener entre 2 y 10 letras. </output> -->
     <app-show-errors-messages [errors]="apellidos.errors"></app-show-errors-messages>
   </div>
@@ -48,6 +48,14 @@
     <input type="text" id="dni" name="dni" [(ngModel)]="vm.Elemento.dni" #dni="ngModel" nif>
     <app-show-errors-messages [errors]="dni.errors"></app-show-errors-messages>
   </div>
+  <fieldset>
+    <legend>Comparaciones</legend>
+    <input type="number" name="origen" [(ngModel)]="test.origen" #origen="ngModel">
+    <output class="error" [myShowErrors]="origen.errors"></output>
+    <input type="number" name="destino" [(ngModel)]="test.destino" #destino="ngModel" lessThan="origen" exclude-start="2" exclude-end="8">
+    <output class="error" [myShowErrors]="destino.errors"></output>
+    {{destino.errors | json}}
+  </fieldset>
   <!-- <div>
     <input type="button" value="enviar" (click)="vm.send()" [disabled]="miForm.invalid" >
     <input type="button" value="volver" (click)="vm.cancel()" >

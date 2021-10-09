@@ -1,5 +1,6 @@
 import { Directive, ElementRef, forwardRef, Input } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorFn } from '@angular/forms';
+import { convertValue } from './utils.class';
 
 export function UppercaseValidation(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -40,28 +41,6 @@ export class NIFValidator implements Validator {
   }
 }
 
-export function IBANValidation(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    if (!control.value) { return null; }
-    const err = { iban: { invalidFormat: true, invalidChar: true } };
-    if (/^\d{1,8}\w$/.test(control.value)) {
-      const letterValue = control.value.substr(control.value.length - 1);
-      const numberValue = control.value.substr(0, control.value.length - 1);
-      err.iban.invalidFormat = false;
-      return letterValue.toUpperCase() === 'TRWAGMYFPDXBNJZSQVHLCKE'.charAt(numberValue % 23) ? null : err;
-    } else { return err; }
-  };
-}
-@Directive({
-  selector: '[iban][formControlName],[iban][formControl],[iban][ngModel]',
-  providers: [{ provide: NG_VALIDATORS, useExisting: IBANValidator, multi: true }]
-})
-export class IBANValidator implements Validator {
-  validate(control: AbstractControl): ValidationErrors | null {
-    return IBANValidation()(control);
-  }
-}
-
 @Directive({
   selector: '[type][formControlName],[type][formControl],[type][ngModel]',
   providers: [
@@ -82,51 +61,42 @@ export class TypeValidator implements Validator {
   }
 }
 
-@Directive({
-  selector: '[equalsTo][formControlName],[equalsTo][formControl],[equalsTo][ngModel]',
-  providers: [{ provide: NG_VALIDATORS, useExisting: EqualValidator, multi: true }]
-})
-export class EqualValidator implements Validator {
-  @Input('equalsTo') validateEqual: string | null | undefined;
-
-  validate(control: AbstractControl): ValidationErrors | null {
-    if (!control.value) return null;
-    if (!this.validateEqual)
-      throw new Error('Falta el control de referencia.');
-
-    let valor = control.value;
-    let cntrlBind = control.root.get(this.validateEqual);
-    if (!cntrlBind)
-      throw new Error('No encuentro el control de referencia.');
-
-    if (valor) {
-      return (valor !== cntrlBind.value) ? { 'equalsTo': `${valor} es distinto de ${cntrlBind?.value}` } : null;
-    }
-    return null;
-  }
-}
-
-export function BeforeValidation(limite: string): ValidatorFn {
+export function ExcludeValidation(start: any, end: any): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     if (!control.value) { return null; }
-    let fechaLimite = (new Date(limite)).valueOf();
-    let fechaIntroducida = (new Date(control.value)).valueOf();
-    if(isNaN(fechaLimite))
-      throw new Error('No es una fecha correcta')
-    return !isNaN(fechaIntroducida) && fechaIntroducida < fechaLimite ? null : { before: `Tiene que ser anterior a la fecha anterior al ${(new Date(limite)).toLocaleDateString()}` }
+    if(!start) throw new Error("Falta el valor de inicio del rango")
+    if(!end) throw new Error("Falta el valor de finalización del rango")
+    return control.value < (start) || (control.value) > (end) ? null : { exclude: `Tiene que ser menor que ${start} o mayor que ${end}` }
   };
 }
 
 @Directive({
-  selector: '[before][formControlName],[before][formControl],[before][ngModel]',
-  providers: [{ provide: NG_VALIDATORS, useExisting: BeforeValidator, multi: true }]
+  selector: '[exclude-start][formControlName],[exclude-start][formControl],[exclude-start][ngModel],[formControlName],[exclude-end][formControl],[exclude-end][ngModel]',
+  providers: [{ provide: NG_VALIDATORS, useExisting: ExcludeValidator, multi: true }]
 })
-export class BeforeValidator implements Validator {
-  @Input() before = ''
-
+export class ExcludeValidator implements Validator {
+  @Input('exclude-start') start: any;
+  @Input('exclude-end') end: any;
   validate(control: AbstractControl): ValidationErrors | null {
-    return BeforeValidation(this.before)(control);
+    return ExcludeValidation(this.start, this.end)(control);
   }
 }
 
-export const MIS_VALIDADORES = [UppercaseValidator, NIFValidator, TypeValidator, EqualValidator, BeforeValidator ]
+export function NotBlankValidation(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+     return control.value?.trim() ? null : { notblank: 'No puede estar en blanco' }
+  };
+}
+
+@Directive({
+  selector: '[notblank]',
+  providers: [{ provide: NG_VALIDATORS, useExisting: NotBlankValidator, multi: true }]
+})
+export class NotBlankValidator implements Validator {
+  validate(control: AbstractControl): ValidationErrors | null {
+    return NotBlankValidation()(control);
+  }
+}
+
+
+export const MIS_VALIDADORES = [UppercaseValidator, NIFValidator, TypeValidator, ExcludeValidator, NotBlankValidator ]

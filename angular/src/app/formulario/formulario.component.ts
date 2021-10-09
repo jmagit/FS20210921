@@ -61,6 +61,7 @@ export class PersonasViewModel {
   styleUrls: ['./formulario.component.scss']
 })
 export class FormularioComponent implements OnInit {
+  test: any = {}
 
   constructor(public vm: PersonasViewModel) { }
 
