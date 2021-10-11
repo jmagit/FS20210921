@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ERROR_LEVEL, LoggerService } from 'src/lib/my-core';
-import { NotificationService } from '../common-services';
+import { NotificationService, NotificationType } from '../common-services';
 
 import { Injectable } from '@angular/core';
+import { Unsubscribable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class EstadoDemoService {
@@ -22,7 +23,7 @@ export class EstadoDemoService {
   providers: [ LoggerService, { provide: ERROR_LEVEL, useValue: 1 },
   ],
 })
-export class DemosComponent implements OnInit {
+export class DemosComponent implements OnInit, OnDestroy {
   private nombre: string = 'mundo';
   listado = [
     { id: 1, nombre: 'Madrid' },
@@ -36,6 +37,8 @@ export class DemosComponent implements OnInit {
   visible = true;
   estetica = { importante: true, error: false, urgente: true };
   fontSize = 18;
+
+  private suscriptor: Unsubscribable | undefined;
 
   constructor(private log: LoggerService, public vm: NotificationService, private estado: EstadoDemoService) {
     // log.error('Es un error');
@@ -99,6 +102,15 @@ export class DemosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.suscriptor = this.vm.Notificacion.subscribe(n => {
+      if (n.Type !== NotificationType.error) { return; }
+      window.alert(`Suscripcion: ${n.Message}`);
+      this.vm.remove(this.vm.Listado.length - 1);
+      });
+  }
+  ngOnDestroy(): void {
+    if(this.suscriptor)
+    this.suscriptor.unsubscribe();
   }
 
 }
