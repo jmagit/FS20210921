@@ -33,7 +33,7 @@ export class BeforeOrEqualsValidator implements Validator {
   @Input() beforeOrEquals = ''
 
   validate(control: AbstractControl): ValidationErrors | null {
-    return DateValidation(this.beforeOrEquals, (a, b) => a < b)(control)?
+    return DateValidation(this.beforeOrEquals, (a, b) => a <= b)(control)?
       { beforeOrEquals: `Tiene que ser anterior o igual al ${(new Date(this.beforeOrEquals)).toLocaleDateString()}` } : null;
   }
 }
@@ -59,7 +59,7 @@ export class AfterOrEqualsValidator implements Validator {
   @Input() afterOrEquals = ''
 
   validate(control: AbstractControl): ValidationErrors | null {
-    return DateValidation(this.afterOrEquals, (a, b) => a < b)(control)?
+    return DateValidation(this.afterOrEquals, (a, b) => a >= b)(control)?
       { afterOrEquals: `Tiene que ser posterior o igual al ${(new Date(this.afterOrEquals)).toLocaleDateString()}` } : null;
   }
 }

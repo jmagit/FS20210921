@@ -57,6 +57,7 @@
 
 <p [hidden]="!visible">Ahora me ves</p>
 <p *ngIf="visible">Ahora exito</p>
+<p [hidden]="Nombre.length < 10">Ahora es largo</p>
 
 <p [ngClass]="estetica">
   Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur sed dolore deleniti cum eligendi laborum

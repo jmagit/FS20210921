@@ -10,7 +10,7 @@ export function UppercaseValidation(): ValidatorFn {
 }
 
 @Directive({
-  selector: '[uppercase]',
+  selector: '[uppercase][formControlName],[uppercase][formControl],[uppercase][ngModel]',
   providers: [{ provide: NG_VALIDATORS, useExisting: UppercaseValidator, multi: true }]
 })
 export class UppercaseValidator implements Validator {
@@ -20,7 +20,7 @@ export class UppercaseValidator implements Validator {
 }
 
 export function NIFValidation(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } | null => {
+  return (control: AbstractControl): ValidationErrors | null => {
     if (!control.value) { return null; }
     const err = { nif: { invalidFormat: true, invalidChar: true, message: 'No es un NIF valido' } };
     if (/^\d{1,8}\w$/.test(control.value)) {
@@ -61,6 +61,52 @@ export class TypeValidator implements Validator {
   }
 }
 
+// export function IBANValidation(): ValidatorFn {
+//   return (control: AbstractControl): { [key: string]: any } | null => {
+//     if (!control.value) { return null; }
+//     const err = { iban: { invalidFormat: true, invalidChar: true } };
+//     if (/^\d{1,8}\w$/.test(control.value)) {
+//       const letterValue = control.value.substr(control.value.length - 1);
+//       const numberValue = control.value.substr(0, control.value.length - 1);
+//       err.iban.invalidFormat = false;
+//       return letterValue.toUpperCase() === 'TRWAGMYFPDXBNJZSQVHLCKE'.charAt(numberValue % 23) ? null : err;
+//     } else { return err; }
+//   };
+// }
+// @Directive({
+//   selector: '[iban][formControlName],[iban][formControl],[iban][ngModel]',
+//   providers: [{ provide: NG_VALIDATORS, useExisting: IBANValidator, multi: true }]
+// })
+// export class IBANValidator implements Validator {
+//   validate(control: AbstractControl): ValidationErrors | null {
+//     return IBANValidation()(control);
+//   }
+// }
+
+// @Directive({
+//   selector: '[equalsTo][formControlName],[equalsTo][formControl],[equalsTo][ngModel]',
+//   providers: [{ provide: NG_VALIDATORS, useExisting: EqualValidator, multi: true }]
+// })
+// export class EqualValidator implements Validator {
+//   @Input('equalsTo') validateEqual: string | null | undefined;
+
+//   validate(control: AbstractControl): ValidationErrors | null {
+//     if (!control.value) return null;
+//     if (!this.validateEqual)
+//       throw new Error('Falta el control de referencia.');
+
+//     let valor = control.value;
+//     let cntrlBind = control.root.get(this.validateEqual);
+//     if (!cntrlBind)
+//       throw new Error('No encuentro el control de referencia.');
+
+//     if (valor) {
+//       return (valor !== cntrlBind.value) ? { 'equalsTo': `${valor} es distinto de ${cntrlBind?.value}` } : null;
+//     }
+//     return null;
+//   }
+// }
+
 export function ExcludeValidation(start: any, end: any): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     if (!control.value) { return null; }
@@ -72,6 +118,7 @@ export function ExcludeValidation(start: any, end: any): ValidatorFn {
 
 @Directive({
   selector: '[exclude-start][formControlName],[exclude-start][formControl],[exclude-start][ngModel],[formControlName],[exclude-end][formControl],[exclude-end][ngModel]',
+//  selector: '[exclude-start][exclude-end][formControlName],[exclude-start][exclude-end][formControl],[exclude-start][exclude-end][ngModel]',
   providers: [{ provide: NG_VALIDATORS, useExisting: ExcludeValidator, multi: true }]
 })
 export class ExcludeValidator implements Validator {

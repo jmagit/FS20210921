@@ -86,14 +86,6 @@ export class LessThanValidator implements Validator {
   @Input('lessThanMessage') message: string | null | undefined;
 
   validate(control: AbstractControl): ValidationErrors | null {
-    // if (!this.unsubscribe && this.bindControl) {
-    //   let bindControl = control.root.get(this.bindControl);
-    //   if (!bindControl)
-    //     throw new Error('No encuentro el control de referencia.');
-    //   // bindControl.valueChanges.subscribe(() => {
-    //   //   control.updateValueAndValidity();
-    //   // })
-    // }
     let validationErrors = CrossInputValidation(this.bindControl, (a, b) => a < b, this.propertyName)(control)
     if (validationErrors)
       if (this.message)
