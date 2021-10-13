@@ -14,7 +14,7 @@ import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { ERROR_LEVEL, LoggerHTTPService, LoggerService, MyCoreModule } from 'src/lib/my-core';
 import { AjaxWaitInterceptor, MainModule } from './main';
 import { CommonServicesModule } from './common-services';
-import { SecurityModule } from './security';
+import { AuthInterceptor, SecurityModule } from './security';
 import { environment } from 'src/environments/environment';
 import { FormularioComponent } from './formulario/formulario.component';
 import { CommonComponentModule } from './common-component';
@@ -43,7 +43,8 @@ import { LibrosModule } from './libros';
     { provide: ERROR_LEVEL, useValue: environment.ERROR_LEVEL },
     { provide: LOCALE_ID, useValue: 'es-ES'},
     { provide: HTTP_INTERCEPTORS, useClass: AjaxWaitInterceptor, multi: true, },
-    ],
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

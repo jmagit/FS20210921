@@ -6,7 +6,7 @@ import { LoggerService } from 'src/lib/my-core';
 import { RESTDAOService } from '../base-code/RESTDAOService';
 import { ModoCRUD } from '../base-code/tipos';
 import { NavigationService, NotificationService } from '../common-services';
-import { AUTH_REQUIRED } from '../security';
+import { AuthService, AUTH_REQUIRED } from '../security';
 
 export class Contactos {
   id: number = 0;
@@ -56,7 +56,7 @@ export class ContactosViewModelService {
   protected idOriginal: any = null;
   protected listURL = '/contactos';
 
-  constructor(protected notify: NotificationService,
+  constructor(protected notify: NotificationService, public auth: AuthService,
     protected out: LoggerService, private navigation: NavigationService,
     protected dao: ContactosDAOService, protected router: Router) { }
 
