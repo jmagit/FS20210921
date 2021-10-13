@@ -4,7 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { NotificationComponent } from './notification/notification.component';
 import { CommonServicesModule } from '../common-services';
 import { NotificationModalComponent } from './notification-modal/notification-modal.component';
-
+import { AjaxWaitComponent } from './ajax-wait';
 
 
 @NgModule({
@@ -12,11 +12,13 @@ import { NotificationModalComponent } from './notification-modal/notification-mo
     HomeComponent,
     NotificationComponent,
     NotificationModalComponent,
+    AjaxWaitComponent,
   ],
   exports: [
     HomeComponent,
     NotificationComponent,
     NotificationModalComponent,
+    AjaxWaitComponent,
   ],
   imports: [
     CommonModule, CommonServicesModule,

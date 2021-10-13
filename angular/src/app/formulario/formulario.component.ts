@@ -60,7 +60,12 @@ export class PersonasViewModel {
   }
 
   public delete() {
-    this.notify.add('Borrado');
+    if(this.Elemento.id)
+    this.dao.remove(this.Elemento.id).subscribe(
+     data => this.notify.add('Borrado'),
+      err => this.notify.add(err.message)
+    );
+  //this.notify.add('Borrado');
   }
 
   public cancel() {
