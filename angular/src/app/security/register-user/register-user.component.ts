@@ -1,6 +1,6 @@
-import { Component, OnInit, Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray, ValidatorFn, AbstractControl } from '@angular/forms';
-import { User, RegisterUserDAO, LoginService } from '../services/serguridad.service';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormArray, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { User, RegisterUserDAO, LoginService } from '../security.service';
 import { Router } from '@angular/router';
 import { NotificationService, NotificationType } from 'src/app/common-services';
 import { LoggerService } from 'src/lib/my-core';
@@ -18,7 +18,8 @@ export class RegisterUserComponent implements OnInit {
     private out: LoggerService, private router: Router, private login: LoginService) { }
 
   passwordMatchValidator(): ValidatorFn {
-    return (g: AbstractControl) => g?.get('passwordValue')?.value === g?.get('passwordConfirm')?.value ? null : { 'mismatch': true };
+    return (control: AbstractControl): ValidationErrors | null => control?.get('passwordValue')?.value === control?.get('passwordConfirm')?.value
+      ? null : { 'mismatch': 'Son distintos' };
   }
 
   ngOnInit() {
@@ -32,31 +33,86 @@ export class RegisterUserComponent implements OnInit {
       password: new FormGroup({
         passwordValue: new FormControl('', [Validators.required, Validators.minLength(2)]),
         passwordConfirm: new FormControl('', Validators.minLength(2)),
-      }, this.passwordMatchValidator),
+      }, this.passwordMatchValidator()),
       roles: new FormArray([])
     });
-    for (const name in this.miForm.controls) {
-      if (this.miForm.controls[name] instanceof FormControl) {
-        this.miForm.controls[name].valueChanges.subscribe(
-          data => { this.formatErrorMessage(this.miForm.controls[name] as FormControl); }
-        );
+    // for (const name in this.miForm.controls) {
+    //   if (this.miForm.controls[name] instanceof FormControl) {
+    //     this.miForm.controls[name].valueChanges.subscribe(
+    //       data => { this.formatErrorMessage(this.miForm.controls[name] as FormControl); }
+    //     );
+    //     // this.formatErrorMessage(this.miForm.controls[name] as FormControl);
+    //     this.miForm.controls[name].setValue(this.miForm.controls[name].value)
+    //   }
+    // }
+  }
+  public getErrorMessage(name: string): string {
+    let cntr = this.miForm.get(name)
+    let msg = '';
+    if (cntr)
+      for (let err in cntr.errors) {
+        switch (err) {
+          case 'required':
+            msg += 'Es obligatorio. ';
+            break;
+          case 'minlength':
+            msg += `Como mínimo debe tener ${cntr.errors[err].requiredLength} caracteres. `;
+            break;
+          case 'maxlength':
+            msg += `Como máximo debe tener ${cntr.errors[err].requiredLength} caracteres. `;
+            break;
+          case 'pattern':
+          case 'email':
+            msg += 'El formato no es correcto. ';
+            break;
+          case 'min':
+            msg += `El valor debe ser mayor o igual a ${cntr.errors[err].min}. `;
+            break;
+          case 'max':
+            msg += `El valor debe ser inferior o igual a ${cntr.errors[err].max}. `;
+            break;
+          default:
+            if (typeof cntr.errors[err] === 'string')
+              msg += `${cntr.errors[err]}${cntr.errors[err].endsWith('.') ? '' : '.'} `;
+            else if (typeof cntr.errors[err]?.message === 'string')
+              msg += `${cntr.errors[err].message}${cntr.errors[err].message.endsWith('.') ? '' : '.'} `;
+            break;
+        }
       }
-    }
+    return msg.trim();
   }
   private formatErrorMessage(cntr: FormControl): void {
-    if (cntr.invalid) {
-      if (cntr.hasError('required')) {
-        cntr.setErrors({ 'customMsg': 'Es obligatorio.' });
-      } else if (cntr.hasError('minlength')) {
-        cntr.setErrors({ 'customMsg': `Al menos debe tener ${cntr.getError('minlength').requiredLength} caracteres.` });
-      } else if (cntr.hasError('maxlength')) {
-        cntr.setErrors({ 'customMsg': `Como máximo puede tener ${cntr.getError('maxlength').requiredLength} caracteres.` });
-      } else if (cntr.hasError('email')) {
-        cntr.setErrors({ 'customMsg': 'Formato incorrecto de correo electronico.' });
-      } else if (cntr.hasError('mismatch')) {
-        cntr.setErrors({ 'customMsg': 'No coincide.' });
+    let msg = '';
+    for (let err in cntr.errors) {
+      switch (err) {
+        case 'required':
+          msg += 'Es obligatorio. ';
+          break;
+        case 'minlength':
+          msg += `Como mínimo debe tener ${cntr.errors[err].requiredLength} caracteres. `;
+          break;
+        case 'maxlength':
+          msg += `Como máximo debe tener ${cntr.errors[err].requiredLength} caracteres. `;
+          break;
+        case 'pattern':
+        case 'email':
+          msg += 'El formato no es correcto. ';
+          break;
+        case 'min':
+          msg += `El valor debe ser mayor o igual a ${cntr.errors[err].min}. `;
+          break;
+        case 'max':
+          msg += `El valor debe ser inferior o igual a ${cntr.errors[err].max}. `;
+          break;
+        default:
+          if (typeof cntr.errors[err] === 'string')
+            msg += `${cntr.errors[err]}${cntr.errors[err].endsWith('.') ? '' : '.'} `;
+          else if (typeof cntr.errors[err]?.message === 'string')
+            msg += `${cntr.errors[err].message}${cntr.errors[err].message.endsWith('.') ? '' : '.'} `;
+          break;
       }
     }
+    cntr.setErrors(Object.assign({}, cntr.errors, { 'customMsg': msg }));
   }
   addRole(): void {
     (this.miForm.get('roles') as FormArray).push(
@@ -79,7 +135,7 @@ export class RegisterUserComponent implements OnInit {
         this.login.login(data.idUsuario, data.password.passwordValue).subscribe(
           datos => {
             if (datos) {
-              this.notify.add('Ususario reguistrado', NotificationType.log);
+              this.notify.add('Usuario registrado', NotificationType.log);
               this.router.navigateByUrl('/');
             } else {
               this.notify.add('Error en el registro.');

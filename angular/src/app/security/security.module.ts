@@ -12,7 +12,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule, FormsModule, ReactiveFormsModule, RouterModule.forRoot(routes),
+    CommonModule, FormsModule, ReactiveFormsModule, RouterModule.forChild(routes),
   ],
   declarations: [ LoginComponent, RegisterUserComponent ],
   exports: [ LoginComponent, RegisterUserComponent ],
