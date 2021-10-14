@@ -111,8 +111,8 @@ export class ContactosViewModelService {
     this.idOriginal = null;
     // this.list();
     // this.router.navigateByUrl(this.listURL);
-    this.load(this.page)
-    // this.navigation.back()
+    // this.load(this.page)
+    this.navigation.back()
   }
 
   public send(): void {

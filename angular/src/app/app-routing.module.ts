@@ -11,8 +11,8 @@ import { HomeComponent, PageNotFoundComponent } from './main';
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
   { path: 'inicio', component: HomeComponent },
-  { path: 'demos', component: DemosComponent },
-  { path: 'chisme/de/hacer/numeros', component: CalculadoraComponent },
+  { path: 'demos', component: DemosComponent, data: { pageTitle: 'Demos' }  },
+  { path: 'chisme/de/hacer/numeros', component: CalculadoraComponent, data: { pageTitle: 'Calculadora' } },
   { path: 'contactos', component: ContactosListComponent },
   { path: 'contactos/add', component: ContactosAddComponent },
   { path: 'contactos/:id/edit', component: ContactosEditComponent },
