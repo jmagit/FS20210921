@@ -108,8 +108,8 @@ export class LibrosViewModelService {
     this.elemento = {};
     this.idOriginal = null;
     // this.list();
-    // this.router.navigateByUrl(this.listURL);
-    this.load(this.page)
+    this.router.navigateByUrl(this.listURL);
+    // this.load(this.page)
     // this.navigation.back()
   }
 
