@@ -7,7 +7,7 @@ import { LoggerService } from 'src/lib/my-core';
 import { RESTDAOService } from '../base-code/RESTDAOService';
 import { NavigationService, NotificationService } from '../common-services';
 
-import { Contactos, ContactosDAOService, ContactosViewModelService } from './servicios.service';
+import { BlogDAOService, BlogViewModelService } from './servicios.service';
 
 export class DAOServiceMock<T, K> extends RESTDAOService<T, number> {
   constructor(http: HttpClient, public listado: Array<T>) {
@@ -37,23 +37,23 @@ export class DAOServiceMock<T, K> extends RESTDAOService<T, number> {
   }
 }
 
-describe('ContactosDAOService', () => {
+describe('BlogDAOService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule ],
-      providers: [ ContactosDAOService ],
+      providers: [ BlogDAOService ],
     });
   });
 
-  it('query', inject([ContactosDAOService, HttpTestingController], (dao: ContactosDAOService, httpMock: HttpTestingController) => {
+  it('query', inject([BlogDAOService, HttpTestingController], (dao: BlogDAOService, httpMock: HttpTestingController) => {
     dao.query().subscribe(
       data => {
         expect(data.length).toEqual(4);
       },
       data => { fail(); }
     );
-    // const req = httpMock.expectOne('http://localhost:4321/contactos');
-    const req = httpMock.expectOne('/api/contactos');
+    // const req = httpMock.expectOne('http://localhost:4321/blog');
+    const req = httpMock.expectOne('/api/blog');
     expect(req.request.method).toEqual('GET');
     req.flush([
       {"id":1,"tratamiento":"Sra.","nombre":"Marline","apellidos":"Lockton Jerrans","telefono":"846 054 444","email":"mjerrans0@de.vu","sexo":"M","nacimiento":"1973-07-09","avatar":"https://randomuser.me/api/portraits/women/1.jpg","conflictivo":true},
@@ -64,11 +64,11 @@ describe('ContactosDAOService', () => {
     httpMock.verify();
   }));
 
-  it('change', inject([ContactosDAOService, HttpTestingController], (dao: ContactosDAOService, httpMock: HttpTestingController) => {
+  it('change', inject([BlogDAOService, HttpTestingController], (dao: BlogDAOService, httpMock: HttpTestingController) => {
     let item = {id:1, nombre:"Pepito",apellido:"Grillo"};
     dao.change(1, item).subscribe(() => { });
-    // const req = httpMock.expectOne('http://localhost:4321/contactos');
-    const req = httpMock.expectOne('/api/contactos/1');
+    // const req = httpMock.expectOne('http://localhost:4321/blog');
+    const req = httpMock.expectOne('/api/blog/1');
     expect(req.request.method).toEqual('PUT');
     expect(req.request.body.id).toEqual(1);
     expect(req.request.body.nombre).toEqual('Pepito');
@@ -77,16 +77,16 @@ describe('ContactosDAOService', () => {
 
 });
 
-describe('ContactosViewModelService', () => {
-  let service: ContactosViewModelService;
-  let dao: ContactosDAOService;
+describe('BlogViewModelService', () => {
+  let service: BlogViewModelService;
+  let dao: BlogDAOService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [NotificationService, LoggerService,
         {
-          provide: ContactosDAOService, useFactory: (http: HttpClient) => new DAOServiceMock<Contactos, number>(http, [
+          provide: BlogDAOService, useFactory: (http: HttpClient) => new DAOServiceMock<any, number>(http, [
             {"id":1,"tratamiento":"Sra.","nombre":"Marline","apellidos":"Lockton Jerrans","telefono":"846 054 444","email":"mjerrans0@de.vu","sexo":"M","nacimiento":"1973-07-09","avatar":"https://randomuser.me/api/portraits/women/1.jpg","conflictivo":true},
             {"id":2,"tratamiento":"Sr.","nombre":"Beale","apellidos":"Knibb Koppe","telefono":"093 804 977","email":"bkoppe0@apache.org","sexo":"H","nacimiento":"1995-11-22","avatar":"https://randomuser.me/api/portraits/men/1.jpg","conflictivo":false},
             {"id":3,"tratamiento":"Srta.","nombre":"Gwenora","apellidos":"Forrestor Fitzackerley","telefono":"853 134 343","email":"gfitzackerley1@opensource.org","sexo":"M","nacimiento":"1968-06-12","avatar":"https://randomuser.me/api/portraits/women/2.jpg","conflictivo":false},
@@ -95,8 +95,8 @@ describe('ContactosViewModelService', () => {
         }
       ],
     });
-    service = TestBed.inject(ContactosViewModelService);
-    dao = TestBed.inject(ContactosDAOService);
+    service = TestBed.inject(BlogViewModelService);
+    dao = TestBed.inject(BlogDAOService);
   });
 
   it('should be created', () => {

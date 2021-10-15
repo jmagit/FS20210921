@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'contactos/:id/edit', component: ContactosEditComponent, canActivate: [ AuthGuard ] },
   { path: 'contactos/:id', component: ContactosViewComponent },
   { path: 'contactos/:id/:kk', component: ContactosViewComponent },
+  { path: 'antonie/hasted', redirectTo: '/contactos/27'},
   { path: 'libros', children: [
     { path: '', component: LibrosComponent },
     { path: 'add', component: LibrosComponent },
@@ -26,7 +27,7 @@ const routes: Routes = [
     { path: ':id', component: LibrosComponent },
     { path: ':id/:kk', component: LibrosComponent },
   ]},
-  { path: 'antonie/hasted', redirectTo: '/contactos/27'},
+  { path: 'blog', loadChildren: () => import('./blog/modulo.module').then(mod => mod.BlogModule)},
   { path: 'config', loadChildren: () => import('./config/config.module').then(mod => mod.ConfigModule)},
   { path: 'registro', component: RegisterUserComponent },
   { path: '404.html', component: PageNotFoundComponent },
