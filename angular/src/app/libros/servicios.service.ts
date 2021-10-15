@@ -46,7 +46,9 @@ export class LibrosDAOService extends RESTDAOService<any, any> {
   }
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LibrosViewModelService {
   protected modo: ModoCRUD = 'list';
   protected listado: Array<any> = [];

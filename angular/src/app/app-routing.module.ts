@@ -5,7 +5,7 @@ import { ContactosAddComponent, ContactosEditComponent, ContactosListComponent, 
 import { DemosComponent } from './demos/demos.component';
 import { LibrosComponent } from './libros';
 import { HomeComponent, PageNotFoundComponent } from './main';
-import { RegisterUserComponent } from './security';
+import { AuthGuard, RegisterUserComponent } from './security';
 
 // http://localhost:4200/contactos/add
 
@@ -15,8 +15,8 @@ const routes: Routes = [
   { path: 'demos', component: DemosComponent, data: { pageTitle: 'Demos' }  },
   { path: 'chisme/de/hacer/numeros', component: CalculadoraComponent, data: { pageTitle: 'Calculadora' } },
   { path: 'contactos', component: ContactosListComponent },
-  { path: 'contactos/add', component: ContactosAddComponent },
-  { path: 'contactos/:id/edit', component: ContactosEditComponent },
+  { path: 'contactos/add', component: ContactosAddComponent, canActivate: [ AuthGuard ] },
+  { path: 'contactos/:id/edit', component: ContactosEditComponent, canActivate: [ AuthGuard ] },
   { path: 'contactos/:id', component: ContactosViewComponent },
   { path: 'contactos/:id/:kk', component: ContactosViewComponent },
   { path: 'libros', children: [
