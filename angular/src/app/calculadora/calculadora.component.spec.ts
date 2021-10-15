@@ -2,7 +2,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { LoggerService } from 'src/lib/my-core';
-import { NotificationService } from '../common-services';
+import { NotificationService, NotificationType } from '../common-services';
 
 import { CalculadoraComponent } from './calculadora.component';
 
@@ -218,6 +218,7 @@ describe('Pruebas aisladas de la calculadora', () => {
 describe('CalculadoraComponent', () => {
   let component: CalculadoraComponent;
   let fixture: ComponentFixture<CalculadoraComponent>;
+  let notify: NotificationService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -231,6 +232,8 @@ describe('CalculadoraComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CalculadoraComponent);
     component = fixture.componentInstance;
+    notify = TestBed.inject(NotificationService)
+    spyOn(notify, 'add')
     fixture.detectChanges();
   });
 
@@ -244,11 +247,16 @@ describe('CalculadoraComponent', () => {
     let tag: HTMLElement = fixture.debugElement.query(By.css('.Pantalla')).nativeElement;
     expect(tag.textContent?.trim()).toBe('0')
     component.ponOperando(123)
+    expect(component.Pantalla).toBe('123')
     fixture.detectChanges()
     expect(tag.textContent?.trim()).toBe('123')
     fixture.debugElement.query(By.css('[value="7"]')).triggerEventHandler('click', null);
     fixture.detectChanges()
     expect(tag.textContent?.trim()).toBe('1237')
+    fixture.debugElement.query(By.css('[value="."]')).triggerEventHandler('click', null);
+    fixture.debugElement.query(By.css('[value="."]')).triggerEventHandler('click', null);
+    expect(notify.add).toHaveBeenCalled();
+    expect(notify.add).toHaveBeenCalledWith('Ya está la coma', NotificationType.warn)
   });
 
 });

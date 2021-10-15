@@ -2,7 +2,7 @@ import { inject, TestBed } from '@angular/core/testing';
 
 import { ERROR_LEVEL, LoggerService } from './logger.service';
 
-describe('LoggerService', () => {
+fdescribe('LoggerService', () => {
   const message = 'Notificación a consola'
   let service: LoggerService;
 

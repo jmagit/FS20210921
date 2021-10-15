@@ -23,7 +23,7 @@ describe('NotificationService', () => {
   });
 
 
-  it('add message', (done: DoneFn) => {
+  it('add message: error', (done: DoneFn) => {
     service.Notificacion.subscribe(
       data => { expect(data.Message).toBe(message); done(); },
       () => fail()
@@ -36,6 +36,20 @@ describe('NotificationService', () => {
     expect(service.Listado[0].Type).toBe(NotificationType.error);
     expect(log.error).toHaveBeenCalled();
     expect(log.error).toHaveBeenCalledWith(`NOTIFICATION: ${message}`)
+  });
+
+  it('add message: warn', (done: DoneFn) => {
+    service.Notificacion.subscribe(
+      data => { expect(data.Message).toBe(message); done(); },
+      () => fail()
+    );
+    service.add(message, NotificationType.warn)
+    expect(service.HayNotificaciones).toBeTruthy();
+    expect(service.Listado.length).toBe(1);
+    expect(service.Listado[0].Id).toBe(1);
+    expect(service.Listado[0].Message).toBe(message);
+    expect(service.Listado[0].Type).toBe(NotificationType.warn);
+    expect(log.error).not.toHaveBeenCalled();
   });
 
   it('remove message', () => {
