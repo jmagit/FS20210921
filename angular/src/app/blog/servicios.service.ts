@@ -31,6 +31,9 @@ export class BlogDAOService extends RESTDAOService<any, any> {
         )
     })
   }
+  likeit(item: any): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/${item.id}`, { megusta: item.megusta } )
+  }
 }
 
 @Injectable({
@@ -137,5 +140,14 @@ export class BlogViewModelService {
       },
       err => this.notify.add(err.message)
     )
+  }
+
+  debounce = false;
+  likeit(delta: 1 | -1) {
+    if(this.debounce) return;
+    this.debounce = true;
+    this.elemento.megusta = this.elemento.megusta ? this.elemento.megusta + delta : delta
+    this.dao.likeit(this.elemento)
+      .subscribe(() => {}, err => this.notify.add(err.message), () => this.debounce = false );
   }
 }
