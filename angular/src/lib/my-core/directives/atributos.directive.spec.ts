@@ -34,7 +34,7 @@ describe('WindowConfirmDirective', () =>  {
     expect(tag).toBeDefined();
   });
 
-  it('click', () => {
+  it('click confirm', () => {
     let ok = false;
     let myWinConfirmMessage = 'Texto de confirmación'
     component.MyOutput = () => ok = true;
@@ -44,6 +44,20 @@ describe('WindowConfirmDirective', () =>  {
     tag.triggerEventHandler('click', null);
     expect(window.confirm).toHaveBeenCalled()
     expect(window.confirm).toHaveBeenCalledWith(myWinConfirmMessage)
+    expect(ok).toBeTruthy()
+  });
+
+  it('click cancel', () => {
+    let ok = false;
+    let myWinConfirmMessage = 'Texto de confirmación'
+    component.MyOutput = () => ok = true;
+    component.MyInput = myWinConfirmMessage
+    spyOn(window, 'confirm').and.returnValue(false)
+    fixture.detectChanges();
+    tag.triggerEventHandler('click', null);
+    expect(window.confirm).toHaveBeenCalled()
+    expect(window.confirm).toHaveBeenCalledWith(myWinConfirmMessage)
+    expect(ok).toBeFalse()
   });
 
   it('class pressed', () => {

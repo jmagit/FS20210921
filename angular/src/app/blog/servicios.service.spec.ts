@@ -157,7 +157,7 @@ describe('BlogViewModelService', () => {
   it('delete: reject confirm', fakeAsync(() => {
     spyOn(window, 'confirm').and.returnValue(false)
     service.delete(4)
-    dao.query().subscribe(data => expect(data.length).toBe(4))
+    dao.query().subscribe(data => expect(data.length).toBe(3))
     tick()
   }))
 
