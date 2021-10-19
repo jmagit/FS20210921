@@ -74,3 +74,8 @@ Cuaquleir tetxo se pduee leer... si se respetan la primera y la última letra de
 7. Laboratorio CRUD: Contactos
 8. Laboratorio Routing
 9. Testing de servicios, componentes, directivas
+
+## Testing
+
+https://mvnrepository.com/artifact/org.mockito/mockito-core/4.0.0
+https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter/4.0.0
