@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.example.infraestructure.repositories.ActorRepository;
 import com.example.ioc.Servicio;
 
 @SpringBootApplication
@@ -21,10 +22,17 @@ public class DemoApplication implements CommandLineRunner {
 	@Value("${mi.propia.clave}")
 	String name;
 	
+	@Autowired
+	ActorRepository dao;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		
-		System.out.println("Soy " + name);
+		System.out.println(dao.getById(1));
+		
+		//dao.findAll().forEach(System.out::println);
+		
+		
 	}
 
 }
