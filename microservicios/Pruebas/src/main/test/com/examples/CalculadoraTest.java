@@ -23,7 +23,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 class CalculadoraTest {
-	Calculadora calc;
+	Calc calc;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -63,7 +63,7 @@ class CalculadoraTest {
 	@Nested
 	@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 	class Divisiones {
-		Calculadora calc;
+		Calc calc;
 
 		@BeforeEach
 		void setUp() throws Exception {

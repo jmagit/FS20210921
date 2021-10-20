@@ -19,7 +19,7 @@ public class MockTest {
 	
 	@Test
 	void suma_mock() {
-		Calculadora calculadora = mock(Calculadora.class); 
+		Calc calculadora = mock(Calculadora.class); 
 		assertNotNull(calculadora);
 //		when(calculadora.suma(2, 2)).thenReturn(2.0);
 //		
