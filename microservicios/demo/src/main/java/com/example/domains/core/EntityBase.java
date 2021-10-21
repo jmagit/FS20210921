@@ -18,6 +18,16 @@ public abstract class EntityBase<E> {
 		return validator.validate((E) this);
 	}
 	
+	@JsonIgnore
+	@Transient
+	public String getErroString() {
+		Set<ConstraintViolation<E>> lst = getErrors();
+		if(lst.isEmpty()) return "";
+		StringBuilder sb = new StringBuilder("ERRORES:");
+		lst.forEach(item -> sb.append(" " + item.getPropertyPath() + ": " + item.getMessage() + "."));
+		return sb.toString();
+	}
+	
 	@Transient
 	@JsonIgnore
 	public boolean isValid() {

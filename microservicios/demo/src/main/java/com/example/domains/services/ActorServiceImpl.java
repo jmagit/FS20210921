@@ -33,7 +33,7 @@ public class ActorServiceImpl implements ActorService {
 		if(item == null)
 			throw new InvalidDataException("Faltan los datos");
 		if(item.isInvalid())
-			throw new InvalidDataException("Errores de validación: ");
+			throw new InvalidDataException(item.getErroString());
 		if(getOne(item.getActorId()).isPresent())
 			throw new DuplicateKeyException();
 		return dao.save(item);
@@ -44,7 +44,7 @@ public class ActorServiceImpl implements ActorService {
 		if(item == null)
 			throw new InvalidDataException("Faltan los datos");
 		if(item.isInvalid())
-			throw new InvalidDataException("Errores de validación: ");
+			throw new InvalidDataException(item.getErroString());
 		if(getOne(item.getActorId()).isEmpty())
 			throw new NotFoundException();
 		return dao.save(item);
