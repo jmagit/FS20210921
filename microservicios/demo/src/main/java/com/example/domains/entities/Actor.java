@@ -43,7 +43,6 @@ public class Actor extends EntityBase<Actor> implements Serializable {
 	@Column(name="last_name")
 	@NotBlank
 	@Length(min=2, max = 45)
-	@NIF
 	private String lastName;
 
 	@Column(name="last_update")
