@@ -13,8 +13,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.example.domains.contracts.services.ActorService;
 import com.example.domains.entities.Actor;
 import com.example.domains.entities.Film;
+import com.example.domains.entities.dtos.ActorDTO;
 import com.example.infraestructure.repositories.ActorRepository;
 import com.example.ioc.Servicio;
 
@@ -25,14 +27,17 @@ public class DemoApplication implements CommandLineRunner {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@Autowired
-	Servicio srv;
+//	@Autowired
+//	Servicio srv;
+//	
+//	@Value("${mi.propia.clave}")
+//	String name;
+//	
+//	@Autowired
+//	ActorRepository dao;
 	
-	@Value("${mi.propia.clave}")
-	String name;
-	
 	@Autowired
-	ActorRepository dao;
+	ActorService srv;
 	
 	@Override
 	@Transactional
@@ -44,8 +49,8 @@ public class DemoApplication implements CommandLineRunner {
 //			System.out.println("No encontrado");
 //		}
 		
-		Actor actor= new Actor(0, "Pepito", "Grillo");
-		actor.addFilmActor(new Film(1));
+//		Actor actor= new Actor(0, "Pepito", "Grillo");
+//		actor.addFilmActor(new Film(1));
 //		Actor actor= a.get();
 //		actor.setFirstName(actor.getFirstName().toUpperCase());
 //		dao.save(actor);
@@ -64,6 +69,14 @@ public class DemoApplication implements CommandLineRunner {
 //		dao.laMia(new Date(LocalDate.now().toString())).forEach(System.out::println);
 //		dao.findByLastUpdateGreaterThan(LocalDate.now()).forEach(System.out::println);
 
+//		srv.getAll().forEach(System.out::println);
+		// srv.getAll().forEach(item-> System.out.println(ActorDTO.from(item)));
+//		var fuera = new ActorDTO(205, "PEPITO", "GRILLO");
+//		System.out.println(srv.modify(ActorDTO.from(fuera)));
+		
+		srv.getAll().forEach(System.out::println);
+		// srv.modify(new Actor(333));
+//		srv.getAll().forEach(System.out::println);
 	}
 
 }
