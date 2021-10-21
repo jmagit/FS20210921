@@ -75,15 +75,25 @@ public class DemoApplication implements CommandLineRunner {
 //		var fuera = new ActorDTO(205, "PEPITO", "GRILLO");
 //		System.out.println(srv.modify(ActorDTO.from(fuera)));
 		
-		dao.findByActorIdNotNull(ActorShort.class)
-			.forEach(item-> System.out.println(item.getNombreCompleto()));
-		dao.findByActorIdNotNull(ActorDTO.class)
-		.forEach(item-> System.out.println(item));
-		dao.findByActorIdNotNull(Actor.class)
-		.forEach(item-> System.out.println(item));
+//		dao.findByActorIdNotNull(ActorShort.class)
+//			.forEach(item-> System.out.println(item.getNombreCompleto()));
+//		dao.findByActorIdNotNull(ActorDTO.class)
+//		.forEach(item-> System.out.println(item));
+//		dao.findByActorIdNotNull(Actor.class)
+//		.forEach(item-> System.out.println(item));
 			// .forEach(System.out::println);
 		// srv.modify(new Actor(333));
 //		srv.getAll().forEach(System.out::println);
+		Actor actor= new Actor(0, "", "  5 ");
+		if(actor.isInvalid())
+			actor.getErrors().forEach(item-> 
+			System.out.println(item.getPropertyPath() + ": " + item.getMessage())
+			);
+		else {
+			System.out.println("Valido");
+		}
+		// dao.save(actor);
+		srv.add(actor);
 	}
 
 }
