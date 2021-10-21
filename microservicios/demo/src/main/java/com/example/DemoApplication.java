@@ -17,6 +17,7 @@ import com.example.domains.contracts.services.ActorService;
 import com.example.domains.entities.Actor;
 import com.example.domains.entities.Film;
 import com.example.domains.entities.dtos.ActorDTO;
+import com.example.domains.entities.dtos.ActorShort;
 import com.example.infraestructure.repositories.ActorRepository;
 import com.example.ioc.Servicio;
 
@@ -33,8 +34,8 @@ public class DemoApplication implements CommandLineRunner {
 //	@Value("${mi.propia.clave}")
 //	String name;
 //	
-//	@Autowired
-//	ActorRepository dao;
+	@Autowired
+	ActorRepository dao;
 	
 	@Autowired
 	ActorService srv;
@@ -74,7 +75,13 @@ public class DemoApplication implements CommandLineRunner {
 //		var fuera = new ActorDTO(205, "PEPITO", "GRILLO");
 //		System.out.println(srv.modify(ActorDTO.from(fuera)));
 		
-		srv.getAll().forEach(System.out::println);
+		dao.findByActorIdNotNull(ActorShort.class)
+			.forEach(item-> System.out.println(item.getNombreCompleto()));
+		dao.findByActorIdNotNull(ActorDTO.class)
+		.forEach(item-> System.out.println(item));
+		dao.findByActorIdNotNull(Actor.class)
+		.forEach(item-> System.out.println(item));
+			// .forEach(System.out::println);
 		// srv.modify(new Actor(333));
 //		srv.getAll().forEach(System.out::println);
 	}
