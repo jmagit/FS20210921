@@ -67,7 +67,7 @@ public class DemoApplication implements CommandLineRunner {
 //			System.out.println("No encontrado");
 //		}
 		//dao.findByFirstNameStartingWithOrderByLastNameDesc("P").forEach(System.out::println);
-//		dao.laMia(new Date(LocalDate.now().toString())).forEach(System.out::println);
+//		dao.laMia(new Date(Date.parse(LocalDate.now().toString()))).forEach(System.out::println);
 //		dao.findByLastUpdateGreaterThan(LocalDate.now()).forEach(System.out::println);
 
 //		srv.getAll().forEach(System.out::println);
