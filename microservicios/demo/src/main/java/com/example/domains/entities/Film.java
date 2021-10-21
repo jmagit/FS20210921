@@ -71,6 +71,11 @@ public class Film implements Serializable {
 	public Film() {
 	}
 
+	public Film(int filmId) {
+		super();
+		this.filmId = filmId;
+	}
+
 	public int getFilmId() {
 		return this.filmId;
 	}
@@ -231,6 +236,11 @@ public class Film implements Serializable {
 		inventory.setFilm(null);
 
 		return inventory;
+	}
+
+	@Override
+	public String toString() {
+		return "Film [filmId=" + filmId + ", title=" + title + "]";
 	}
 
 }

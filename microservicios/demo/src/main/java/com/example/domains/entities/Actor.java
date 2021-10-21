@@ -1,8 +1,14 @@
 package com.example.domains.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,11 +35,12 @@ public class Actor implements Serializable {
 	private String lastName;
 
 	@Column(name="last_update")
+	@Generated(value = GenerationTime.ALWAYS)
 	private Timestamp lastUpdate;
 
 	//bi-directional many-to-one association to FilmActor
 	@OneToMany(mappedBy="actor")
-	private List<FilmActor> filmActors;
+	private List<FilmActor> filmActors = new ArrayList<FilmActor>();
 
 	public Actor() {
 	}
@@ -94,6 +101,13 @@ public class Actor implements Serializable {
 		getFilmActors().add(filmActor);
 		filmActor.setActor(this);
 
+		return filmActor;
+	}
+	public FilmActor addFilmActor(Film film) {
+		if(film == null)
+			throw new IllegalArgumentException("La pelicula es obligatoria");
+		var filmActor = new FilmActor(film, this);
+		getFilmActors().add(filmActor);
 		return filmActor;
 	}
 
