@@ -19,5 +19,13 @@
 		<class>com.example.domains.entities.Rental</class>
 		<class>com.example.domains.entities.Staff</class>
 		<class>com.example.domains.entities.Store</class>
+		<class>kk.Actor</class>
+		<class>kk.Category</class>
+		<class>kk.Film</class>
+		<class>kk.FilmActor</class>
+		<class>kk.FilmActorPK</class>
+		<class>kk.FilmCategory</class>
+		<class>kk.FilmCategoryPK</class>
+		<class>kk.Language</class>
 	</persistence-unit>
 </persistence>
