@@ -48,3 +48,44 @@ Accept: text/xml, application/json
 Content-Type: application/x-www-form-urlencoded
 
 id=0&nombre=Pepito&apellidos=Grillo
+
+###
+
+get  http://localhost:8001/actores
+
+###
+
+get  http://localhost:8001/actores/1/peliculas
+
+
+###
+
+get  http://localhost:8001/actores?page=0&size=10&sort=firstName
+
+###
+
+post http://localhost:8001/actores/3
+Content-Type: application/json
+
+{
+  "id": 0,
+  "nombre": "",
+  "apellidos": "coton"
+}
+
+###
+
+put http://localhost:8001/actores/206
+Content-Type: application/json
+
+{
+  "id": 206,
+  "nombre": "CARMELO",
+  "apellidos": "COTON"
+}
+
+###
+
+delete  http://localhost:8001/actores/206
+
+
