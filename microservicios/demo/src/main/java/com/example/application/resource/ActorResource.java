@@ -76,7 +76,9 @@ public class ActorResource {
 		if(actor.isEmpty())
 			throw new NotFoundException();
 		else {
-			return (List<FilmShort>) actor.get().getFilmActors().stream().map(item -> FilmShort.from(item)).collect(Collectors.toList());
+			return (List<FilmShort>) actor.get().getFilmActors().stream()
+					.map(item -> FilmShort.from(item))
+					.collect(Collectors.toList());
 		}
 	}
 	

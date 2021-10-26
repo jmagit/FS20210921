@@ -1,4 +1,4 @@
-package kk;
+package com.example.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -15,28 +15,19 @@ import java.util.List;
 @NamedQuery(name="Language.findAll", query="SELECT l FROM Language l")
 public class Language extends com.example.domains.core.EntityBase implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="language_id")
 	private int languageId;
-
-	@Column(name="last_update")
 	private Timestamp lastUpdate;
-
 	private String name;
-
-	//bi-directional many-to-one association to Film
-	@OneToMany(mappedBy="language")
 	private List<Film> films;
-
-	//bi-directional many-to-one association to Film
-	@OneToMany(mappedBy="languageVO")
 	private List<Film> filmsVO;
 
 	public Language() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="language_id")
 	public int getLanguageId() {
 		return this.languageId;
 	}
@@ -45,6 +36,8 @@ public class Language extends com.example.domains.core.EntityBase implements Ser
 		this.languageId = languageId;
 	}
 
+
+	@Column(name="last_update")
 	public Timestamp getLastUpdate() {
 		return this.lastUpdate;
 	}
@@ -52,6 +45,7 @@ public class Language extends com.example.domains.core.EntityBase implements Ser
 	public void setLastUpdate(Timestamp lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
+
 
 	public String getName() {
 		return this.name;
@@ -61,6 +55,9 @@ public class Language extends com.example.domains.core.EntityBase implements Ser
 		this.name = name;
 	}
 
+
+	//bi-directional many-to-one association to Film
+	@OneToMany(mappedBy="language")
 	public List<Film> getFilms() {
 		return this.films;
 	}
@@ -83,6 +80,9 @@ public class Language extends com.example.domains.core.EntityBase implements Ser
 		return film;
 	}
 
+
+	//bi-directional many-to-one association to Film
+	@OneToMany(mappedBy="languageVO")
 	public List<Film> getFilmsVO() {
 		return this.filmsVO;
 	}

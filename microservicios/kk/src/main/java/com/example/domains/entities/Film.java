@@ -1,4 +1,4 @@
-package kk;
+package com.example.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -16,57 +16,28 @@ import java.util.List;
 @NamedQuery(name="Film.findAll", query="SELECT f FROM Film f")
 public class Film extends com.example.domains.core.EntityBase implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="film_id")
 	private int filmId;
-
-	@Lob
 	private String description;
-
-	@Column(name="last_update")
 	private Timestamp lastUpdate;
-
 	private int length;
-
 	private String rating;
-
-	@Column(name="release_year")
 	private Short releaseYear;
-
-	@Column(name="rental_duration")
 	private byte rentalDuration;
-
-	@Column(name="rental_rate")
 	private BigDecimal rentalRate;
-
-	@Column(name="replacement_cost")
 	private BigDecimal replacementCost;
-
 	private String title;
-
-	//bi-directional many-to-one association to Language
-	@ManyToOne
-	@JoinColumn(name="language_id")
 	private Language language;
-
-	//bi-directional many-to-one association to Language
-	@ManyToOne
-	@JoinColumn(name="original_language_id")
 	private Language languageVO;
-
-	//bi-directional many-to-one association to FilmActor
-	@OneToMany(mappedBy="film")
 	private List<FilmActor> filmActors;
-
-	//bi-directional many-to-one association to FilmCategory
-	@OneToMany(mappedBy="film")
 	private List<FilmCategory> filmCategories;
 
 	public Film() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="film_id")
 	public int getFilmId() {
 		return this.filmId;
 	}
@@ -75,6 +46,8 @@ public class Film extends com.example.domains.core.EntityBase implements Seriali
 		this.filmId = filmId;
 	}
 
+
+	@Lob
 	public String getDescription() {
 		return this.description;
 	}
@@ -83,6 +56,8 @@ public class Film extends com.example.domains.core.EntityBase implements Seriali
 		this.description = description;
 	}
 
+
+	@Column(name="last_update")
 	public Timestamp getLastUpdate() {
 		return this.lastUpdate;
 	}
@@ -90,6 +65,7 @@ public class Film extends com.example.domains.core.EntityBase implements Seriali
 	public void setLastUpdate(Timestamp lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
+
 
 	public int getLength() {
 		return this.length;
@@ -99,6 +75,7 @@ public class Film extends com.example.domains.core.EntityBase implements Seriali
 		this.length = length;
 	}
 
+
 	public String getRating() {
 		return this.rating;
 	}
@@ -107,6 +84,8 @@ public class Film extends com.example.domains.core.EntityBase implements Seriali
 		this.rating = rating;
 	}
 
+
+	@Column(name="release_year")
 	public Short getReleaseYear() {
 		return this.releaseYear;
 	}
@@ -115,6 +94,8 @@ public class Film extends com.example.domains.core.EntityBase implements Seriali
 		this.releaseYear = releaseYear;
 	}
 
+
+	@Column(name="rental_duration")
 	public byte getRentalDuration() {
 		return this.rentalDuration;
 	}
@@ -123,6 +104,8 @@ public class Film extends com.example.domains.core.EntityBase implements Seriali
 		this.rentalDuration = rentalDuration;
 	}
 
+
+	@Column(name="rental_rate")
 	public BigDecimal getRentalRate() {
 		return this.rentalRate;
 	}
@@ -131,6 +114,8 @@ public class Film extends com.example.domains.core.EntityBase implements Seriali
 		this.rentalRate = rentalRate;
 	}
 
+
+	@Column(name="replacement_cost")
 	public BigDecimal getReplacementCost() {
 		return this.replacementCost;
 	}
@@ -138,6 +123,7 @@ public class Film extends com.example.domains.core.EntityBase implements Seriali
 	public void setReplacementCost(BigDecimal replacementCost) {
 		this.replacementCost = replacementCost;
 	}
+
 
 	public String getTitle() {
 		return this.title;
@@ -147,6 +133,10 @@ public class Film extends com.example.domains.core.EntityBase implements Seriali
 		this.title = title;
 	}
 
+
+	//bi-directional many-to-one association to Language
+	@ManyToOne
+	@JoinColumn(name="language_id")
 	public Language getLanguage() {
 		return this.language;
 	}
@@ -155,6 +145,10 @@ public class Film extends com.example.domains.core.EntityBase implements Seriali
 		this.language = language;
 	}
 
+
+	//bi-directional many-to-one association to Language
+	@ManyToOne
+	@JoinColumn(name="original_language_id")
 	public Language getLanguageVO() {
 		return this.languageVO;
 	}
@@ -163,6 +157,9 @@ public class Film extends com.example.domains.core.EntityBase implements Seriali
 		this.languageVO = languageVO;
 	}
 
+
+	//bi-directional many-to-one association to FilmActor
+	@OneToMany(mappedBy="film")
 	public List<FilmActor> getFilmActors() {
 		return this.filmActors;
 	}
@@ -185,6 +182,9 @@ public class Film extends com.example.domains.core.EntityBase implements Seriali
 		return filmActor;
 	}
 
+
+	//bi-directional many-to-one association to FilmCategory
+	@OneToMany(mappedBy="film")
 	public List<FilmCategory> getFilmCategories() {
 		return this.filmCategories;
 	}

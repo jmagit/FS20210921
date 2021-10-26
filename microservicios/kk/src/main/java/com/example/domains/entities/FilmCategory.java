@@ -1,4 +1,4 @@
-package kk;
+package com.example.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -14,26 +14,16 @@ import java.sql.Timestamp;
 @NamedQuery(name="FilmCategory.findAll", query="SELECT f FROM FilmCategory f")
 public class FilmCategory extends com.example.domains.core.EntityBase implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@EmbeddedId
 	private FilmCategoryPK id;
-
-	@Column(name="last_update")
 	private Timestamp lastUpdate;
-
-	//bi-directional many-to-one association to Category
-	@ManyToOne
-	@JoinColumn(name="category_id")
 	private Category category;
-
-	//bi-directional many-to-one association to Film
-	@ManyToOne
-	@JoinColumn(name="film_id")
 	private Film film;
 
 	public FilmCategory() {
 	}
 
+
+	@EmbeddedId
 	public FilmCategoryPK getId() {
 		return this.id;
 	}
@@ -42,6 +32,8 @@ public class FilmCategory extends com.example.domains.core.EntityBase implements
 		this.id = id;
 	}
 
+
+	@Column(name="last_update")
 	public Timestamp getLastUpdate() {
 		return this.lastUpdate;
 	}
@@ -50,6 +42,10 @@ public class FilmCategory extends com.example.domains.core.EntityBase implements
 		this.lastUpdate = lastUpdate;
 	}
 
+
+	//bi-directional many-to-one association to Category
+	@ManyToOne
+	@JoinColumn(name="category_id")
 	public Category getCategory() {
 		return this.category;
 	}
@@ -58,6 +54,10 @@ public class FilmCategory extends com.example.domains.core.EntityBase implements
 		this.category = category;
 	}
 
+
+	//bi-directional many-to-one association to Film
+	@ManyToOne
+	@JoinColumn(name="film_id")
 	public Film getFilm() {
 		return this.film;
 	}

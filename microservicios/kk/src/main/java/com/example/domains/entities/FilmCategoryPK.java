@@ -1,4 +1,4 @@
-package kk;
+package com.example.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -11,21 +11,21 @@ import javax.persistence.*;
 public class FilmCategoryPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
-
-	@Column(name="film_id", insertable=false, updatable=false)
 	private int filmId;
-
-	@Column(name="category_id", insertable=false, updatable=false)
 	private byte categoryId;
 
 	public FilmCategoryPK() {
 	}
+
+	@Column(name="film_id", insertable=false, updatable=false)
 	public int getFilmId() {
 		return this.filmId;
 	}
 	public void setFilmId(int filmId) {
 		this.filmId = filmId;
 	}
+
+	@Column(name="category_id", insertable=false, updatable=false)
 	public byte getCategoryId() {
 		return this.categoryId;
 	}

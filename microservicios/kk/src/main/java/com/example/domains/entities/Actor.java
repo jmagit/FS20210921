@@ -1,4 +1,4 @@
-package kk;
+package com.example.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -15,28 +15,19 @@ import java.util.List;
 @NamedQuery(name="Actor.findAll", query="SELECT a FROM Actor a")
 public class Actor extends com.example.domains.core.EntityBase implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="actor_id")
 	private int actorId;
-
-	@Column(name="first_name")
 	private String firstName;
-
-	@Column(name="last_name")
 	private String lastName;
-
-	@Column(name="last_update")
 	private Timestamp lastUpdate;
-
-	//bi-directional many-to-one association to FilmActor
-	@OneToMany(mappedBy="actor")
 	private List<FilmActor> filmActors;
 
 	public Actor() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="actor_id")
 	public int getActorId() {
 		return this.actorId;
 	}
@@ -45,6 +36,8 @@ public class Actor extends com.example.domains.core.EntityBase implements Serial
 		this.actorId = actorId;
 	}
 
+
+	@Column(name="first_name")
 	public String getFirstName() {
 		return this.firstName;
 	}
@@ -53,6 +46,8 @@ public class Actor extends com.example.domains.core.EntityBase implements Serial
 		this.firstName = firstName;
 	}
 
+
+	@Column(name="last_name")
 	public String getLastName() {
 		return this.lastName;
 	}
@@ -61,6 +56,8 @@ public class Actor extends com.example.domains.core.EntityBase implements Serial
 		this.lastName = lastName;
 	}
 
+
+	@Column(name="last_update")
 	public Timestamp getLastUpdate() {
 		return this.lastUpdate;
 	}
@@ -69,6 +66,9 @@ public class Actor extends com.example.domains.core.EntityBase implements Serial
 		this.lastUpdate = lastUpdate;
 	}
 
+
+	//bi-directional many-to-one association to FilmActor
+	@OneToMany(mappedBy="actor")
 	public List<FilmActor> getFilmActors() {
 		return this.filmActors;
 	}

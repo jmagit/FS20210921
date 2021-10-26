@@ -1,4 +1,4 @@
-package kk;
+package com.example.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -14,26 +14,16 @@ import java.sql.Timestamp;
 @NamedQuery(name="FilmActor.findAll", query="SELECT f FROM FilmActor f")
 public class FilmActor extends com.example.domains.core.EntityBase implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@EmbeddedId
 	private FilmActorPK id;
-
-	@Column(name="last_update")
 	private Timestamp lastUpdate;
-
-	//bi-directional many-to-one association to Actor
-	@ManyToOne
-	@JoinColumn(name="actor_id")
 	private Actor actor;
-
-	//bi-directional many-to-one association to Film
-	@ManyToOne
-	@JoinColumn(name="film_id")
 	private Film film;
 
 	public FilmActor() {
 	}
 
+
+	@EmbeddedId
 	public FilmActorPK getId() {
 		return this.id;
 	}
@@ -42,6 +32,8 @@ public class FilmActor extends com.example.domains.core.EntityBase implements Se
 		this.id = id;
 	}
 
+
+	@Column(name="last_update")
 	public Timestamp getLastUpdate() {
 		return this.lastUpdate;
 	}
@@ -50,6 +42,10 @@ public class FilmActor extends com.example.domains.core.EntityBase implements Se
 		this.lastUpdate = lastUpdate;
 	}
 
+
+	//bi-directional many-to-one association to Actor
+	@ManyToOne
+	@JoinColumn(name="actor_id")
 	public Actor getActor() {
 		return this.actor;
 	}
@@ -58,6 +54,10 @@ public class FilmActor extends com.example.domains.core.EntityBase implements Se
 		this.actor = actor;
 	}
 
+
+	//bi-directional many-to-one association to Film
+	@ManyToOne
+	@JoinColumn(name="film_id")
 	public Film getFilm() {
 		return this.film;
 	}

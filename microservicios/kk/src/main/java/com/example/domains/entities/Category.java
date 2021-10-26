@@ -1,4 +1,4 @@
-package kk;
+package com.example.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -15,24 +15,18 @@ import java.util.List;
 @NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
 public class Category extends com.example.domains.core.EntityBase implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="category_id")
 	private int categoryId;
-
-	@Column(name="last_update")
 	private Timestamp lastUpdate;
-
 	private String name;
-
-	//bi-directional many-to-one association to FilmCategory
-	@OneToMany(mappedBy="category")
 	private List<FilmCategory> filmCategories;
 
 	public Category() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="category_id")
 	public int getCategoryId() {
 		return this.categoryId;
 	}
@@ -41,6 +35,8 @@ public class Category extends com.example.domains.core.EntityBase implements Ser
 		this.categoryId = categoryId;
 	}
 
+
+	@Column(name="last_update")
 	public Timestamp getLastUpdate() {
 		return this.lastUpdate;
 	}
@@ -48,6 +44,7 @@ public class Category extends com.example.domains.core.EntityBase implements Ser
 	public void setLastUpdate(Timestamp lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
+
 
 	public String getName() {
 		return this.name;
@@ -57,6 +54,9 @@ public class Category extends com.example.domains.core.EntityBase implements Ser
 		this.name = name;
 	}
 
+
+	//bi-directional many-to-one association to FilmCategory
+	@OneToMany(mappedBy="category")
 	public List<FilmCategory> getFilmCategories() {
 		return this.filmCategories;
 	}
