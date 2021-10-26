@@ -23,6 +23,9 @@ import com.example.domains.entities.dtos.ActorShort;
 import com.example.infraestructure.repositories.ActorRepository;
 import com.example.ioc.Servicio;
 
+import springfox.documentation.oas.annotations.EnableOpenApi;
+
+@EnableOpenApi
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
 
@@ -95,7 +98,7 @@ public class DemoApplication implements CommandLineRunner {
 //		}
 //		// dao.save(actor);
 //		srv.add(actor);
-		dao.laMia(DateFormat.getDateInstance().parse(DateFormat.getDateInstance().format(new Date()))).forEach(System.out::println);
+//		dao.laMia(DateFormat.getDateInstance().parse(DateFormat.getDateInstance().format(new Date()))).forEach(System.out::println);
 	}
 
 }

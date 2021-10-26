@@ -84,8 +84,8 @@ Content-Type: application/json
   "title": "MI PELI",
   "languageId": 5,
   "languageVOId": 3,
-  "actors": [ 1, 3, 5, 7, 10 ],
-  "categories": [ 4, 5 ]
+  "actors": [ 2, 3, 5, 7, 10 ],
+  "categories": [ 1, 5, 3 ]
 }
 
 ###
