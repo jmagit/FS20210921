@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,7 +42,7 @@ public class LanguageResource {
 	@GetMapping
 	@JsonView(Language.Partial.class)
 	public List<Language> getAll() {
-		return dao.findAll();
+		return dao.findAll(Sort.by("name"));
 	}
 
 	@GetMapping(path = "/{id}")
