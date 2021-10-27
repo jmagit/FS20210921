@@ -9,18 +9,26 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.example.domains.entities.Actor;
 import com.example.domains.entities.dtos.ActorDTO;
 
+import lombok.Data;
+
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 public class DemosResource {
@@ -89,4 +97,34 @@ public class DemosResource {
 		return "Llevas " + r + ". Tardo " + ((new Date()).getTime() - ini.getTime()) + " ms.";
 	}	
 
+	@Autowired
+	RestTemplate rest;
+	
+	@Data
+	public static class Categoria {
+		private int id;
+		private String categoria;
+	}
+	
+	@GetMapping("/categorias")
+	public List<Categoria> traeDatos() {
+		ResponseEntity<List<Categoria>> response = rest.exchange("http://localhost:8010/categorias", 
+				HttpMethod.GET,
+				HttpEntity.EMPTY, 
+				new ParameterizedTypeReference<List<Categoria>>() {}
+		);
+		return response.getBody();
+	}
+	
+	@GetMapping("/categorias/{id}")
+	public Categoria traeDatos(@PathVariable int id) {
+		return rest.getForObject("http://host.docker.internal:8010/categorias/{id}", Categoria.class, id);
+	}
+	
+	
+	@GetMapping("/servicio")
+	public String traeHateoas() {
+		return rest.getForObject("lb://catalogo-service/", String.class);
+	}
+	
 }
