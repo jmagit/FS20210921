@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 import com.example.domains.contracts.services.ActorService;
 import com.example.domains.entities.Actor;
@@ -26,6 +27,7 @@ import com.example.ioc.Servicio;
 import springfox.documentation.oas.annotations.EnableOpenApi;
 
 @EnableOpenApi
+@EnableEurekaClient
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
 
