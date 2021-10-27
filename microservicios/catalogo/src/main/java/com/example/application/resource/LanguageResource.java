@@ -36,8 +36,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 @RequestMapping(path = "/idiomas")
 public class LanguageResource {
 	@Autowired
-	private LanguageRepository
-	dao;
+	private LanguageRepository dao;
 
 	@GetMapping
 	@JsonView(Language.Partial.class)
