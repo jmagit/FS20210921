@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'chisme/de/hacer/numeros', component: CalculadoraComponent, data: { pageTitle: 'Calculadora' } },
   { path: 'contactos', component: ContactosListComponent },
   { path: 'contactos/add', component: ContactosAddComponent, canActivate: [ AuthGuard ] },
-  { path: 'contactos/:id/edit', component: ContactosEditComponent, canActivate: [ AuthGuard ] },
+  { path: 'contactos/:id/edit', component: ContactosEditComponent, /* canActivate: [ AuthGuard ] */ },
   { path: 'contactos/:id', component: ContactosViewComponent },
   { path: 'contactos/:id/:kk', component: ContactosViewComponent },
   { path: 'antonie/hasted', redirectTo: '/contactos/27'},

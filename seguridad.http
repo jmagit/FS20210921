@@ -1,0 +1,31 @@
+get http://localhost:8091/seguro
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJNaWNyb3NlcnZpY2lvc0pXVCIsInN1YiI6ImtrIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTYzNTQzNDg1NiwiZXhwIjoxNjM1NDM1NDU2fQ.80wXbiMxUHUoAGCplEc-zkyjrnIiLZjGapLTHa0nODzHjSm_HdZfhpnAzJ1j66pL4W9kLsVVlYiYp8NeuZ6XIA
+
+###
+
+get http://localhost:8091/admin
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJNaWNyb3NlcnZpY2lvc0pXVCIsInN1YiI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdLCJpYXQiOjE2MzU0MzUwNzMsImV4cCI6MTYzNTQzNTY3M30.tNyuMTA33fpQo-mKBFgIvrzfnXX7baU6OLaW0ZVhjny8luHSQ2kq-YObETKVtIzCbgkDtuZh0c-Y2CBDd75fBA
+
+###
+
+get http://localhost:8091/login?name=kk&password=kk
+
+###
+
+post http://localhost:8091/login?name=kk&password=kk
+Content-Type: application/json
+
+{
+    "name": "admin",
+    "password": "kk"
+}
+
+###
+
+post http://localhost:8091/login?name=kk&password=kk
+Content-Type: application/json
+
+{
+    "name": "falla",
+    "password": "kk"
+}

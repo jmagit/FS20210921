@@ -20,8 +20,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -84,7 +82,7 @@ public class ContactosResources {
 	static {
 		try {
 			store = (new ObjectMapper()).readValue(
-					new URL("file:C:\\curso\\samples\\webflux-server\\src\\main\\resources\\contactos.json"), 
+					new URL("file:C:\\curso\\FS20210921\\microservicios\\webflux-server\\src\\main\\resources\\contactos.json"), 
 					new TypeReference<List<Contacto>>() {});
 			store.sort((a, b) -> a.getId() - b.getId());
 		} catch (JsonParseException e) {
@@ -110,7 +108,7 @@ public class ContactosResources {
 		var item = store.stream().filter(f -> f.getId() == id).findFirst();
 		if (item.isEmpty())
 			throw new NotFoundException();
-		return Mono.just(item.get()).delayElement(Duration.ofSeconds(1));
+		return Mono.just(item.get()).delayElement(Duration.ofSeconds(id));
 	}
 
 	@PostMapping

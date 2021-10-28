@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -150,6 +151,14 @@ public class DemosResource {
 	public String traeBalanceado() {
 //		return restLB.getForObject("lb://catalogo-service/", String.class);
 		return proxy.getRaiz();
+	}
+
+	@Value("${jwt.secret}")
+	String secreto;
+	
+	@GetMapping("/config")
+	public String traeConfig() {
+		return secreto;
 	}
 	
 }

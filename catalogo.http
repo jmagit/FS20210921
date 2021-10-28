@@ -50,7 +50,9 @@ GET http://localhost:8010/peliculas/1/reparto
 ###
 GET http://localhost:8010/peliculas/3/categorias
 ###
-POST http://localhost:8010/peliculas
+GET http://localhost:8080/catalogo/peliculas/3
+###
+POST http://localhost:8080/catalogo/peliculas
 Content-Type: application/json
 
 {
@@ -94,3 +96,23 @@ GET http://localhost:8010/peliculas/1/reparto
 GET http://localhost:8010/peliculas/1/categorias
 ###
 DELETE http://localhost:8010/peliculas/1001
+
+###
+GET http://localhost:8010/peliculas/1007
+
+###
+POST http://localhost:8010/peliculas
+Content-Type: application/json
+
+{
+  "id": 0,
+  "titulo": "MI PELI",
+  "descripcion": "Fabricación propias",
+  "idioma": 5,
+  "ultima_actualizacion": "2021-10-27T06:04:12.000+00:00",
+  "duracion": 6,
+  "rate": 1.99,
+  "coste": 21.99,
+  "actorespelis": [ 1, 2, 6],
+  "categoriaspelis": [ 6 ]
+}
