@@ -24,22 +24,28 @@ spring:
       routes:
       - id: serv-catalogo
           #lb:// cuando se va a acceder a través de Eureka
-        uri: lb://catalogo-service
         predicates:
           - Path=/catalogo/**
+        uri: lb://catalogo-service
         filters:
           - RewritePath=/catalogo/*, /
           - RewriteLocationResponseHeader=AS_IN_REQUEST, Location, ,
       - id: serv-demos
-        uri: lb://demo-service
         predicates:
           - Path=/demos/**
+        uri: lb://demo-service
         filters:
           - RewritePath=/demos/*, /
+      - id: serv-contactos
+        predicates:
+          - Path=/contactos/**
+        uri: lb://contactos-service
+        filters:
+          - RewritePath=/contactos/*, /api/contactos
       - id: serv-search
-        uri: https://www.google.com/
         predicates:
           - Path=/search/**
+        uri: https://www.google.com/
         filters:
           - RewritePath=/search/*, /
 logging:
