@@ -7,6 +7,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -15,8 +16,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-@EnableWebSecurity
 @Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
@@ -41,10 +43,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()			
 			.addFilterAfter(new JWTAuthorizationFilter(SECRET), UsernamePasswordAuthenticationFilter.class)
 			.authorizeRequests()
-			.antMatchers(HttpMethod.GET, "/api/contactos/**").permitAll()
-			.antMatchers(HttpMethod.POST, "/api/contactos").authenticated()
-			.antMatchers(HttpMethod.PUT, "/api/contactos").authenticated()
-			.antMatchers(HttpMethod.DELETE, "/api/contactos").authenticated()
-			.anyRequest().permitAll();
+			.anyRequest().permitAll()
+//			.antMatchers(HttpMethod.GET, "/api/contactos/**").permitAll()
+////			.antMatchers(HttpMethod.POST, "/api/contactos").authenticated()
+////			.antMatchers(HttpMethod.PUT, "/api/contactos").authenticated()
+////			.antMatchers(HttpMethod.DELETE, "/api/contactos").authenticated()
+//			.anyRequest().authenticated()
+			;
 	}
 }

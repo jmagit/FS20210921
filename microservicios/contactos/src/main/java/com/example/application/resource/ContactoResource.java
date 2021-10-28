@@ -77,7 +77,7 @@ public class ContactoResource {
 		return rslt.get();
 	}
 
-	@Secured({ "ROLE_USER" })
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public ResponseEntity<Object> add(@Valid @RequestBody Contacto item) throws Exception {
@@ -104,7 +104,7 @@ public class ContactoResource {
 		return dao.save(item); // ConstraintViolationException
 	}
 
-	@Secured({ "ROLE_USER" })
+	@PreAuthorize("authenticated")
 	@DeleteMapping(path = "/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable int id) throws Exception {
