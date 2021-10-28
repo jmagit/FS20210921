@@ -110,3 +110,7 @@ DELETE http://localhost:8001/auto/paises/112
 ###
 
 GET http://localhost:8001/auto/profile/paises
+
+###
+
+POST http://localhost:8089/v2/pet
