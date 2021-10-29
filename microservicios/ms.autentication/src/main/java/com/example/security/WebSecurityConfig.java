@@ -1,9 +1,6 @@
 package com.example.security;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -41,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()			
 			.addFilterAfter(new JWTAuthorizationFilter(SECRET), UsernamePasswordAuthenticationFilter.class)
 			.authorizeRequests()
+			.antMatchers("/actuator/**").permitAll()
 			.antMatchers("/login").permitAll()
 //			.antMatchers(HttpMethod.POST, "/login").permitAll()
 //			.antMatchers(HttpMethod.GET, "/login").permitAll()
