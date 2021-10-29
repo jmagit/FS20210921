@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.example.exceptions.BadRequestException;
 import com.example.exceptions.InvalidDataException;
@@ -105,9 +106,17 @@ public class ContactosResources {
 
 	@GetMapping(path = "/{id}")
 	public Mono<Contacto> getOne(@PathVariable int id) throws NotFoundException {
+			RestTemplate rest = new RestTemplate();
 		var item = store.stream().filter(f -> f.getId() == id).findFirst();
 		if (item.isEmpty())
 			throw new NotFoundException();
+		switch (id) {
+		case 1:
+			return Mono.just(rest.getForObject("http://localhost:4321/api/contactos/1", Contacto.class));
+		case 2:
+			String rslt = rest.getForObject("http://localhost:8001/categorias/1", String.class);
+			break;
+		}
 		return Mono.just(item.get()).delayElement(Duration.ofSeconds(id));
 	}
 

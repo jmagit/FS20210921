@@ -101,7 +101,7 @@ export class ContactosViewModelService {
     if (!window.confirm('¿Seguro?')) { return; }
 
     this.dao.remove(key).subscribe(
-      data => this.list(),
+      data => this.load(), // this.list(),
       err => this.notify.add(err.message)
     );
   }
