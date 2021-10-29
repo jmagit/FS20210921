@@ -91,7 +91,7 @@ https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter/4.0.0
 
 - Microservicio: Catalogo
     - Peliculas, Actores, Idiomas, Categorias
-- Auteticar
+- Autenticar
 - Autorizar: 
   - No autenticados: Solo GET
   - Autenticados: GET, POS, PUT, DELETE 
