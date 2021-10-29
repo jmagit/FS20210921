@@ -83,5 +83,30 @@ https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter/4.0.0
 ## Microservicios
 
 - [Estructura de la BD Sakila](https://dev.mysql.com/doc/sakila/en/sakila-structure.html)
-- [Diagrama de la BD Sakila](https://dev.mysql.com/doc/sakila/en/sakila-structure.html)
+- [Diagrama de la BD Sakila](http://trifulcas.com/wp-content/uploads/2018/03/sakila-er.png)
 
+## Proyecto final
+
+### Back End
+
+- Microservicio: Catalogo
+    - Peliculas, Actores, Idiomas, Categorias
+- Auteticar
+- Autorizar: 
+  - No autenticados: Solo GET
+  - Autenticados: GET, POS, PUT, DELETE 
+- Validaciones
+- Documentado con OpenApi
+- Con bateria de pruebas
+- Despliegue con Docker
+
+### Front End
+
+- Aplicación Angular: Catalogo Sakila
+  - Usuario: Consultar el catalogo
+  - Personal (Autenticados): Mantener el catalogo
+- Con bateria de pruebas
+- Con enrutamientos
+- Validaciones
+- Con estilo: SASS, BEM, ...
+- Accesible
