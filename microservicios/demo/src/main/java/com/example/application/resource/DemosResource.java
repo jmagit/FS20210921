@@ -23,6 +23,7 @@ import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletRequest;
@@ -41,6 +42,7 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 public class DemosResource {
+	private static final Logger LOGGER = Logger.getLogger(DemosResource.class.getName());
 	@GetMapping("/params/{id}")
 	public String cotilla(
 	        @PathVariable String id,
@@ -158,6 +160,7 @@ public class DemosResource {
 	
 	@GetMapping("/config")
 	public String traeConfig() {
+		LOGGER.warning("La configuración es: " + secreto);
 		return secreto;
 	}
 	
