@@ -29,3 +29,13 @@ Content-Type: application/json
     "name": "falla",
     "password": "kk"
 }
+
+###
+
+post http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+    "name": "admin",
+    "password": "kk"
+}

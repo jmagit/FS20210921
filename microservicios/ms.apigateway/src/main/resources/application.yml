@@ -36,12 +36,18 @@ spring:
         uri: lb://demo-service
         filters:
           - RewritePath=/demos, /
-      - id: serv-contactos
+      - id: serv-demos
         predicates:
-          - Path=/contactos/**
-        uri: lb://contactos-service
+          - Path=/demos/**
+        uri: lb://demo-service
         filters:
-          - RewritePath=/contactos, /api/contactos
+          - RewritePath=/demos, /
+      - id: serv-autentication
+        predicates:
+          - Path=/auth/**
+        uri: lb://autentication-service
+        filters:
+          - RewritePath=/auth, /
       - id: serv-search
         predicates:
           - Path=/search/**
